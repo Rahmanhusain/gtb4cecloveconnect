@@ -1,6 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Cookie&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Courgette&display=swap');
+@import url('https://www.cdnfonts.com/mervale-script.font');
 
 @tailwind base;
 @tailwind components;
@@ -9,14 +8,12 @@
 .cookie {
   font-family: "Cookie", serif;
 }
-
-.orbitron {
-  font-family: "Orbitron", serif;
+.mervale{
+  font-family: "Mervale Script", serif;
 }
-.oregano {
-  font-family: "Oregano", serif;
+.courgette{
+  font-family: "Courgette", serif;
 }
-
 :root {
   --background: black;
 }
