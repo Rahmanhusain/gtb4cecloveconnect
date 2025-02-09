@@ -1,11 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Cookie&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.cookie {
+  font-family: "Cookie", serif;
+}
+
+.orbitron {
+  font-family: "Orbitron", serif;
+}
+.oregano {
+  font-family: "Oregano", serif;
+}
+
 :root {
   --background: black;
 }
-
 
 body {
   background: var(--background);
