@@ -20,7 +20,12 @@ export default function Register() {
   const passRef = useRef(null);
   const cfmPassRef = useRef(null);
 
-  const propemailRef = useRef({ email: null, password: null, usertype: null ,name:null});
+  const propemailRef = useRef({
+    email: null,
+    password: null,
+    usertype: null,
+    name: null,
+  });
   const messageref = useRef(null);
 
   async function SendOTP(email) {
@@ -30,7 +35,7 @@ export default function Register() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email,isforget:false }),
+        body: JSON.stringify({ email: email, isforget: false }),
       });
       if (!response.ok) {
         console.error("Server error:", response.status);
@@ -55,7 +60,7 @@ export default function Register() {
       /* const data = Object.fromEntries(formData); */
 
       const status = await SendOTP(formData.get("email"));
-     /*  console.log(status); */
+      /*  console.log(status); */
       if (status === 201) {
         setIsOtpOpen(true);
         propemailRef.current.email = formData.get("email");
@@ -64,47 +69,49 @@ export default function Register() {
       } else if (status == 409) {
         messageref.current = "User already exist Login instead!";
         setisWarnOpen(true);
-      }else if (status == 504) {
+      } else if (status == 504) {
         messageref.current = "Server time Out please try Again !";
         setisWarnOpen(true);
       } else {
         messageref.current = "Something Went Wrong try again!";
         setisWarnOpen(true);
       }
-      
     }
   };
 
   return (
-    <section className="bg-transparent py-8">
+    <section className="bg-transparent cookie">
       <CustomLink
         href={"/"}
-        className="absolute left-3 top-3 text-text flex items-center text-sm hover:cursor-pointer"
+        className="absolute left-3 top-3 text-text flex items-center text-base hover:cursor-pointer"
       >
         <BackIcon size={30} /> Back to Home
       </CustomLink>
-      <div className="flex flex-col items-center justify-center mt-10 sm:mt-0 px-6 py-8 mx-auto sm:min-h-screen lg:py-0 animate-dropped">
+
+
+      <div className="flex flex-col items-center justify-center px-3 sm:px-6 mx-auto min-h-[100dvh]">
         <CustomLink
           href="/"
           className="flex items-center mb-6 text-2xl font-semibold text-text"
         >
-{/*           <Image className="w-16 h-auto" loading="lazy" src={logo} alt="logo" />
- */}        </CustomLink>
+          {/*           <Image className="w-16 h-auto" loading="lazy" src={logo} alt="logo" />
+           */}{" "}
+        </CustomLink>
         <div className="w-full bg-background rounded-lg shadow-xl md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1
-              className="text-xl font-bold leading-tight tracking-tight text-text md:text-2xl"
+              className="text-2xl text-[#db4784] font-bold leading-tight tracking-tight text-text md:text-2xl"
               onClick={() => {
                 dispatch(SetUser("sabeena kjhatun"));
-              }}
-            >
-              Create an account
-            </h1>
-            <form className="space-y-4 md:space-y-6" onSubmit={Submit}>
-              <div>
+                }}
+              >
+                Create an account
+              </h1>
+              <form className="space-y-4 md:space-y-6" onSubmit={Submit}>
+                <div>
                 <label
                   htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-text"
+                  className="block mb-2 text-base font-medium text-text"
                 >
                   Your email
                 </label>
@@ -112,16 +119,16 @@ export default function Register() {
                   type="email"
                   name="email"
                   id="email"
-                  className="border border-gray-200 placeholder-gray-400 outline-none text-text text-sm rounded-lg focus:border-primary block w-full p-2.5"
+                  className="bg-transparent courgette text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none rounded-full block w-full p-2.5"
                   placeholder="name@company.com"
                   required
                 />
-              </div>
+                </div>
 
-              <div>
+                <div>
                 <label
                   htmlFor="name"
-                  className="block mb-2 text-sm font-medium text-text"
+                  className="block mb-2 text-base font-medium text-text"
                 >
                   Your name
                 </label>
@@ -129,18 +136,40 @@ export default function Register() {
                   type="text"
                   name="name"
                   id="name"
-                  className="border border-gray-200 placeholder-gray-400 outline-none text-text text-sm rounded-lg focus:border-blue-500 block w-full p-2.5"
+                  className="bg-transparent courgette text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none text-text rounded-full  block w-full p-2.5"
                   placeholder="John Doe"
                   pattern="^[A-Za-z\s]+$"
                   title="Name should not contain numbers."
                   required
                 />
-              </div>
+                </div>
 
-              <div className="relative">
+                <div>
+                <label
+                  htmlFor="rollno"
+                  className="block mb-2 text-base courgette font-medium text-text"
+                >
+                  IPU enrollment no.
+                </label>
+                <input
+                  type="text"
+                  name="rollno"
+                  id="rollno"
+                  className="bg-transparent courgette text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none text-text rounded-full  block w-full p-2.5"
+                  placeholder="to verifying GTB4CEC students on IP Rank list"
+                  title="Enrollment no. should only contain numbers."
+                  onChange={(e) => {
+                    e.target.value = e.target.value.replace(/\D/g, "");
+                  }
+                }
+                  required
+                />
+                </div>
+
+                <div className="relative">
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-text"
+                  className="block mb-2 text-base font-medium text-text"
                 >
                   Password
                 </label>
@@ -150,24 +179,24 @@ export default function Register() {
                   autoComplete="off"
                   name="password"
                   id="password"
-                  title="password should be atleast 8 digits and one special character."
-                  pattern="(?=.*[\W_]).{2,}"
+                  title="Password should be at least 8 characters and contain one special character."
+                  pattern="(?=.*[\W_]).{8,}"
                   placeholder="••••••••"
-                  className=" border border-gray-200 placeholder-gray-400 outline-none text-text text-sm rounded-lg focus:border-primary block w-full p-2.5"
+                  className="bg-transparent courgette text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none text-text rounded-full focus:border-primary block w-full p-2.5"
                   required
                 />
                 <span
                   className="absolute bottom-2.5 right-2 cursor-pointer"
                   onClick={() => setIsPassVisible(!isPassVisible)}
                 >
-                  {isPassVisible ? <EyeOpen /> : <EyeClose />}
+                  {isPassVisible ? <EyeOpen className='text-[#928b92]' /> : <EyeClose className='text-[#928b92]' />}
                 </span>
-              </div>
-              
-              <div className="relative">
+                </div>
+
+                <div className="relative">
                 <label
                   htmlFor="confirmpassword"
-                  className="block mb-2 text-sm font-medium text-text"
+                  className="block mb-2 text-base font-medium text-text"
                 >
                   Confirm password
                 </label>
@@ -177,8 +206,8 @@ export default function Register() {
                   autoComplete="off"
                   name="confirmpassword"
                   id="confirmpassword"
-                  pattern="(?=.*[\W_]).{2,}"
-                  title="password should be atleast 8 digits and one special character."
+                  pattern="(?=.*[\W_]).{8,}"
+                  title="Password should be at least 8 characters and contain one special character."
                   placeholder="••••••••"
                   onChange={(e) => {
                     passRef.current.value === e.target.value
@@ -190,41 +219,42 @@ export default function Register() {
                       ? setcolormatch(true)
                       : setcolormatch(false);
                   }}
-                  className={`border ${
-                    colormatch ? "border-gray-200" : "border-red-500"
-                  } focus:border-blue-500  ${
+                  className={`bg-transparent border-2 ${
+                    colormatch ? "border-[#717071bf] " : "border-red-500"
+                  }   ${
                     colormatch
                       ? "focus:border-green-500"
                       : "focus:border-red-500"
-                  } placeholder-gray-400 outline-none text-text text-sm rounded-lg block w-full p-2.5`}
+                  } placeholder-gray-400 outline-none courgette text-sm rounded-full block w-full p-2.5`}
                   required
                 />
                 <span
                   className="absolute bottom-2.5 right-2 cursor-pointer"
                   onClick={() => setIsCfmPassVisible(!isCfmPassVisible)}
                 >
-                  {isCfmPassVisible ? <EyeOpen /> : <EyeClose />}
+                  {isCfmPassVisible ? <EyeOpen className='text-[#928b92]' /> : <EyeClose className='text-[#928b92]' />}
                 </span>
               </div>
 
               <button
                 type="submit"
+                disabled={isSending}
                 className={`w-full text-text ${
                   !isSending
-                    ? "bg-primary hover:bg-hover focus:ring-4 focus:outline-none focus:ring-primary text-white"
-                    : "border"
-                } font-medium rounded-lg text-sm px-5 py-[0.65rem] flex items-center justify-center gap-2`}
+                    ? "bg-[#ff006aa7] focus:outline-none focus:ring-primary text-white"
+                    : "bg-[#f71b772f]"
+                } font-medium rounded-full text-lg px-5 py-[0.5rem] flex items-center justify-center gap-2`}
               >
                 {isSending && (
-                  <MiniloadIcon className="w-4 h-4 text-text animate-spin-fast" />
+                  <MiniloadIcon className="w-5 h-5 text-[#db4784] animate-spin" />
                 )}
                 {!isSending ? "Create An Account" : `Please Wait`}
               </button>
-              <div className="text-sm font-light text-gray-400">
+              <div className="text-lg font-light text-gray-50">
                 Already have an account?{" "}
                 <CustomLink
                   href="/login"
-                  className="font-medium text-primary hover:underline"
+                  className="font-medium text-primary hover:underline text-[#db4784]"
                 >
                   Login here
                 </CustomLink>
@@ -243,6 +273,7 @@ export default function Register() {
       {isWarnOpen && (
         <WarningModal
           messege={messageref.current}
+          /* messege={"User already exist Login instead!"} */
           setisWarnOpen={setisWarnOpen}
         />
       )}

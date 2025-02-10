@@ -133,9 +133,9 @@ const OTPhandle = ({ setIsOtpOpen, propemailRef,isforget }) => {
   };
 
   return (
-    <div className="absolute top-0 left-0 right-0 min-h-full bg-transparent flex items-center justify-center backdrop-blur-md">
+    <div className="absolute top-0 left-0 right-0 min-h-full bg-transparent flex items-center justify-center backdrop-blur-xl">
       <div
-        className={`bg-gray-50 p-6 rounded-lg shadow-xl max-w-sm w-full flex flex-col items-center m-4 relative ${
+        className={`bg-[#322e2fad] p-6 rounded-lg shadow-xl max-w-sm w-full flex flex-col items-center m-4 relative ${
           !closeanim ? "animate-popIn" : "animate-popOut"
         } ${closeanim && "scale-0"}`}
       >
@@ -155,12 +155,12 @@ const OTPhandle = ({ setIsOtpOpen, propemailRef,isforget }) => {
           <TickIcon />
         ) : (
           <>
-            <h2 className="text-xl font-semibold mb-4 text-text">Enter OTP</h2>
+            <h2 className="text-xl font-semibold mb-4 text-[#db4784]">Enter OTP</h2>
             <div className="flex space-x-2">
               {!isvarifying ? (
                 otp.map((data, index) => (
                   <input
-                    className="w-12 h-12 text-center text-text bg-background border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-12 h-12 text-center text-text bg-background rounded-md focus:outline-none focus:ring-2 ring-[#db47856e] focus:border-transparent"
                     type="text"
                     maxLength="1"
                     key={index}
@@ -177,20 +177,20 @@ const OTPhandle = ({ setIsOtpOpen, propemailRef,isforget }) => {
                   />
                 ))
               ) : (
-                <MiniloadIcon className="w-7 h-7 text-blue-700 animate-spin-fast" />
+                <MiniloadIcon className="w-7 h-7 text-[#db4784] animate-spin-fast" />
               )}
             </div>
             <button
-              className={`mt-4 text-blue-400 ${
+              className={`mt-4 text-[#db4784] ${
                 !isResendDisabled ? "hover:cursor-pointer" : ""
-              } flex items-center gap-2`}
+              } flex items-center gap-2 text-sm courgette`}
               onClick={handleResend}
               disabled={isResendDisabled}
             >
               {/* Resend OTP {isResendDisabled && `in ${resendTime}s`} */}
               {isResend ? (
                 <>
-                  <MiniloadIcon className="h-5 w-5 text-blue-600 animate-spin-fast" />
+                  <MiniloadIcon className="h-5 w-5 text-[#db4784] animate-spin" />
                   Resending Please wait
                 </>
               ) : (

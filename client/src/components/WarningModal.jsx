@@ -8,7 +8,7 @@ function WarningModal({ messege,setisWarnOpen }) {
   return (
     <section className="fixed top-0 left-0 right-0 bottom-0 bg-transparent flex items-center justify-center backdrop-blur-xl z-30">
       <div
-        className={`shadow-xl rounded-xl flex flex-col w-[31.25rem] mx-3 gap-0 py-5 relative ${
+        className={`shadow-xl rounded-xl flex flex-col w-[31.25rem] mx-3 gap-2 py-5 relative bg-[#322e2fad] ${
           !closeanim ? "animate-popIn" : "animate-popOut"
         } ${closeanim && "scale-0"}`}
       >
@@ -44,7 +44,7 @@ function WarningModal({ messege,setisWarnOpen }) {
         <div className="flex justify-center">
           {/* <button className="h-9 w-20 rounded-3xl bg-transparent outline-2 outline-white">close</button> */}
           
-            <button className="h-8 w-14 text-center text-white  rounded-3xl bg-primary" onClick={() => {
+            <button className="h-8 w-14 text-center text-gray-50 text-lg rounded-3xl bg-[#db4784]" onClick={() => {
             setcloseanim(!closeanim);
             setTimeout(() => {
               setisWarnOpen(false);

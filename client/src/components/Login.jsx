@@ -7,23 +7,26 @@ import WarningModal from "./WarningModal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-
 export default function Login() {
   const [isCfmPassVisible, setIsCfmPassVisible] = useState(false);
   const [isWarnOpen, setisWarnOpen] = useState(false);
   const [isloginsuccess, setisloginsuccess] = useState(false);
   const messageref = useRef(null);
- /*  const dispatch=useAppDispatch(); */
-  const router=useRouter();
+  /*  const dispatch=useAppDispatch(); */
+  const router = useRouter();
 
-  const sendloginReq = async (email, password,userType ) => {
+  const sendloginReq = async (email, password, userType) => {
     try {
       const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email, password: password ,userType:userType}),
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          userType: userType,
+        }),
       });
       const result = await response.json();
       /* console.log(result); */
@@ -41,7 +44,7 @@ export default function Login() {
     const formData = new FormData(e.target);
     const result = await sendloginReq(
       formData.get("email"),
-      formData.get("password"),
+      formData.get("password")
     );
     if (result.status === 401) {
       messageref.current = "Wrong Password Try Again !";
@@ -57,15 +60,14 @@ export default function Login() {
       setisloginsuccess(false);
     } else {
       console.log("login successful");
-    /*   dispatch(SetUser({ email: result.data.email, name: result.data.name })); */
-      /* setisloginsuccess(false)  */     
-      alert("Login Successfull welcome back!"); 
+      /*   dispatch(SetUser({ email: result.data.email, name: result.data.name })); */
+      /* setisloginsuccess(false)  */
+      alert("Login Successfull welcome back!");
       router.push("/");
     }
-    
   };
   return (
-    <section className="bg-transparent">
+    <section className="bg-transparent cookie">
       <CustomLink
         href={"/"}
         className="absolute left-3 top-3 text-text flex items-center text-sm hover:cursor-pointer"
@@ -73,16 +75,17 @@ export default function Login() {
         <BackIcon size={30} />
       </CustomLink>
 
-      <div className="flex flex-col items-center justify-center mt-10 sm:mt-0 px-6 py-8 mx-auto sm:min-h-screen lg:py-0 animate-dropped">
+      <div className="flex flex-col items-center justify-center px-3 sm:px-6 mx-auto min-h-screen lg:py-0 animate-dropped">
         <CustomLink
           href="/"
           className="flex items-center mb-6 text-2xl font-semibold text-text"
         >
-{/*           <Image className="w-16 h-auto" src={logo} alt="logo" />
- */}        </CustomLink>
+          {/*           <Image className="w-16 h-auto" src={logo} alt="logo" />
+           */}{" "}
+        </CustomLink>
         <div className="w-full bg-background rounded-lg shadow-xl  md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-text *: md:text-2xl">
+            <h1 className="text-2xl text-[#db4784] font-bold leading-tight tracking-tight text-text *: md:text-2xl">
               Login To Your Account
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={Submit}>
@@ -98,7 +101,7 @@ export default function Login() {
                   name="email"
                   id="email"
                   autoComplete="email"
-                  className=" border border-gray-200 text-text rounded-lg outline-none focus:border-primary block w-full p-2.5"
+                  className="bg-transparent courgette text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none rounded-full block w-full p-2.5"
                   placeholder="name@company.com"
                   required
                 />
@@ -115,18 +118,17 @@ export default function Login() {
                   name="password"
                   id="password"
                   placeholder="••••••••"
-                  className="border-gray-200 border text-text rounded-lg outline-none focus:border-primary block w-full p-2.5"
+                  className="bg-transparent courgette text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none text-text rounded-full focus:border-primary block w-full p-2.5"
                   required
                 />
                 <span
                   className="absolute bottom-2.5 right-2 cursor-pointer"
                   onClick={() => setIsCfmPassVisible(!isCfmPassVisible)}
                 >
-                  {isCfmPassVisible ? <EyeOpen /> : <EyeClose />}
+                  {isCfmPassVisible ?  <EyeOpen className='text-[#928b92]' /> : <EyeClose className='text-[#928b92]' />}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                
                 <CustomLink
                   href="/forgotpassword"
                   className="text-sm font-medium text-hover hover:underline"
@@ -137,20 +139,22 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={isloginsuccess ? true : false}
-                className={`w-full  ${
-                  isloginsuccess ? "text-black border" : " text-white bg-primary  hover:bg-hover"
-                }  font-medium rounded-lg text-sm px-5 py-2.5 flex justify-center items-center gap-2 cursor-pointer`}
+                className={`w-full text-text ${
+                  !isloginsuccess
+                    ? "bg-[#ff006aa7] focus:outline-none focus:ring-primary text-white"
+                    : "bg-[#f71b772f]"
+                } font-medium rounded-full text-lg px-5 py-[0.5rem] flex items-center justify-center gap-2`}
               >
                 {isloginsuccess && (
-                  <MiniloadIcon className="w-4 h-4 text-text animate-spin-fast" />
+                  <MiniloadIcon className="w-5 h-5 text-text animate-spin" />
                 )}
                 {isloginsuccess ? "Please Wait" : "Login"}
               </button>
-              <div className="text-sm font-light text-gray-600">
+              <div className="text-lg font-light text-gray-50">
                 Don&apos;t have an account yet?{" "}
                 <CustomLink
                   href="/register"
-                  className="font-medium text-primary hover:underline"
+                  className="font-medium text-primary hover:underline text-[#db4784]"
                 >
                   Register
                 </CustomLink>
