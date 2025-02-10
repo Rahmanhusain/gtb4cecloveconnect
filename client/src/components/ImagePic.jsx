@@ -5,26 +5,26 @@ import girl from '../../public/bla.jpg'
 export default function ImagePic() {
   return (
     <div className=''>
-      <div className='flex flex-row items-center justify-evenly h-[100vh]'>
+      <div className='flex flex-row items-center justify-evenly min-h-[100vh]'>
 
-        <div className="heartbreak">
-          left
+        <div className="heartbreak fixed top-1/2 left-1/4">
+          
         </div>
         <div className="mainImg h-full w-1/4 flex flex-col items-start justify-center">
-          <Image src={girl} alt='girlimage' className='rounded-2xl w-auto h-[50vh] brightness-75' />
-          <h2 className='cookie text-5xl mt-4 italic'>Lisa</h2>
-          <div className='flex flex-row items-center justify-start gap-2 courgette'>
-            <h3 className='bg-[#FF006Aa7] text-sm  p-1 px-4 rounded-full'>hello</h3>
-            <h3 className='bg-[#FF006Aa7] text-sm  p-1 px-4 rounded-full'>hello</h3>
-            <h3 className='bg-[#FF006Aa7] text-sm  p-1 px-4 rounded-full'>hello</h3>
+          <Image src={girl} alt='girlimage' className='rounded-2xl h-[55vh] w-auto aspect-[39/49] object-cover  brightness-75' />
+          <h2 className='cookie text-4xl mt-4 italic'>Lisa</h2>
+          <div className='flex flex-row items-center justify-start gap-2 MervaleScript'>
+            <h3 className='bg-[#FF006Aa7] text-sm  p-1 px-4 rounded-full tracking-widest'>hello</h3>
+            <h3 className='bg-[#FF006Aa7] text-sm  p-1 px-4 rounded-full tracking-widest'>hello</h3>
+            <h3 className='bg-[#FF006Aa7] text-sm  p-1 px-4 rounded-full tracking-widest'>hello</h3>
           </div>
 
-          <h2 className='cookie text-5xl mt-8 italic'>Bio</h2>
-          <p className='courgette italic w-full text-sm'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa modi dolor quisquam tenetur voluptatibus vero labore consequatur quasi quibusdam ipsa? Perferendis animi amet temporibus veniam sequi consectetur tempora quisquam culpa cumque repellat? Molestias iste omnis perspiciatis fugiat quidem porro dolor delectus eveniet eligendi cupiditate assumenda dignissimos autem, aspernatur nulla illum.
+          <h2 className='cookie text-4xl mt-8 italic'>Bio</h2>
+          <p className='courgette w-full pr-4 aspect-[39/49] text-xs text-gray-300 tracking-wider'>
+            Kind-hearted and always up for a good conversation. I love trying new things, reading, and spending time with loved ones. Looking for someone who values honesty, empathy, and trust. If you're looking for a partner in crime who will support and encourage you, let's connect.
           </p>
         </div>
-        <div className="heartbreak">
+        <div className="heartbreak fixed top-1/2 right-1/4">
           right
         </div>
       </div>
