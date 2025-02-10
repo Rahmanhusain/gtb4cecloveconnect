@@ -45,6 +45,13 @@ export default function ImagePic() {
         <div className="heartbreak fixed top-1/2 right-1/4  bg-[#FF006A40] rounded-full p-4">
           <Heart className="w-12 h-12 text-[#E1306C]" />
         </div>
+        
+      </div>
+      <div id="hearts-alpaca" className="hearts fixed bottom-0 left-0 opacity-50 sm:opacity-100">
+        <div className="heart"></div>
+        <div className="heart"></div>
+        <div className="heart"></div>
+        <div className="heart"></div>
       </div>
     </div>
   );
