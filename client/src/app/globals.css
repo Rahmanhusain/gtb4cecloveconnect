@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Cookie&family=Courgette&display=swap');
-@import url('https://www.cdnfonts.com/mervale-script.font');
 
 @tailwind base;
 @tailwind components;
@@ -8,12 +7,13 @@
 .cookie {
   font-family: "Cookie", serif;
 }
-.mervale{
-  font-family: "Mervale Script", serif;
-}
-.courgette{
+
+
+
+.courgette {
   font-family: "Courgette", serif;
 }
+
 :root {
   --background: black;
 }
