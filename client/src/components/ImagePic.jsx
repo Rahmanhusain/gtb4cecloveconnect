@@ -9,7 +9,7 @@ export default function ImagePic() {
         left
       </div>
       <div className="mainImg aspect-4/3">
-        <Image src={girl} width={400} height={500}/>
+        <Image src={girl} alt='girlimage' width={400} height={500}/>
       </div>
       <div className="heartbreak">
         right
