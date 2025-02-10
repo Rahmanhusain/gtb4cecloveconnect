@@ -1,11 +1,10 @@
-export const SettingsIcon = () => (
+export const SettingsIcon = ({ className = "w-7 h-7 text-gray-500" }) => (
   <svg
     viewBox="0 0 25 25"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    width="25px"
-    height="25px"
-    className="hover:rotate-90 transition-transform duration-500 ease-in-out"
+    className={className}
+    /* className="hover:rotate-90 transition-transform duration-500 ease-in-out" */
   >
     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
     <g
@@ -135,7 +134,6 @@ export const SendIcon = () => {
         strokeLinejoin="round"
       ></g>
       <g id="SVGRepo_iconCarrier">
-        <title>send_plane_fill</title>
         <g
           id="页面-1"
           stroke="none"
@@ -253,7 +251,7 @@ export const CrossIcon = ({ size, ...props }) => {
           <g
             id="Icon-Set-Filled"
             transform="translate(-570.000000, -1089.000000)"
-            fill='currentColor'
+            fill="currentColor"
           >
             <path
               d="M591.657,1109.24 C592.048,1109.63 592.048,1110.27 591.657,1110.66 C591.267,1111.05 590.633,1111.05 590.242,1110.66 L586.006,1106.42 L581.74,1110.69 C581.346,1111.08 580.708,1111.08 580.314,1110.69 C579.921,1110.29 579.921,1109.65 580.314,1109.26 L584.58,1104.99 L580.344,1100.76 C579.953,1100.37 579.953,1099.73 580.344,1099.34 C580.733,1098.95 581.367,1098.95 581.758,1099.34 L585.994,1103.58 L590.292,1099.28 C590.686,1098.89 591.323,1098.89 591.717,1099.28 C592.11,1099.68 592.11,1100.31 591.717,1100.71 L587.42,1105.01 L591.657,1109.24 Z M586,1089 C577.163,1089 570,1096.16 570,1105 C570,1113.84 577.163,1121 586,1121 C594.837,1121 602,1113.84 602,1105 C602,1096.16 594.837,1089 586,1089 L586,1089 Z"
@@ -284,45 +282,54 @@ export const NoImageIcon = ({ color, ...props }) => (
     </g>
   </svg>
 );
-export const EyeOpen = ({ ...props }) => {
-  return (
-    <svg
-      width="24px"
-      height="24px"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path
-        d="M4 12C4 12 5.6 7 12 7M12 7C18.4 7 20 12 20 12M12 7V4M18 5L16 7.5M6 5L8 7.5M15 13C15 14.6569 13.6569 16 12 16C10.3431 16 9 14.6569 9 13C9 11.3431 10.3431 10 12 10C13.6569 10 15 11.3431 15 13Z"
-        stroke="black"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-};
 
-export const EyeClose = ({ ...props }) => {
-  return (
-    <svg
-      width="24px"
-      height="24px"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+
+export const EyeCloseIcon = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    className={className}
+  >
+    <g>
       <path
-        d="M4 10C4 10 5.6 15 12 15M12 15C18.4 15 20 10 20 10M12 15V18M18 17L16 14.5M6 17L8 14.5"
-        stroke="black"
+        d="M20 14.8335C21.3082 13.3317 22 12 22 12C22 12 18.3636 5 12 5C11.6588 5 11.3254 5.02013 11 5.05822C10.6578 5.09828 10.3244 5.15822 10 5.23552M12 9C12.3506 9 12.6872 9.06015 13 9.17071C13.8524 9.47199 14.528 10.1476 14.8293 11C14.9398 11.3128 15 11.6494 15 12M3 3L21 21M12 15C11.6494 15 11.3128 14.9398 11 14.8293C10.1476 14.528 9.47198 13.8524 9.1707 13C9.11386 12.8392 9.07034 12.6721 9.04147 12.5M4.14701 9C3.83877 9.34451 3.56234 9.68241 3.31864 10C2.45286 11.1282 2 12 2 12C2 12 5.63636 19 12 19C12.3412 19 12.6746 18.9799 13 18.9418"
+        stroke="currentColor"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </svg>
-  );
-};
+    </g>
+  </svg>
+);
+
+export const EyeOpenIcon = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    className={className}
+  >
+    <g>
+      <path
+        d="M12 5C5.63636 5 2 12 2 12C2 12 5.63636 19 12 19C18.3636 19 22 12 22 12C22 12 18.3636 5 12 5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </g>
+  </svg>
+);
+
+
 
 export const MiniloadIcon = ({ ...props }) => {
   return (
@@ -516,7 +523,7 @@ export const ArrowsIcon = ({ className = "w-6 h-6 text-gray-500" }) => (
   </svg>
 );
 
-export const Instagram = ({ color = "#FFFFFF" ,...props}) => (
+export const Instagram = ({ color = "#FFFFFF", ...props }) => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
@@ -545,44 +552,120 @@ export const Instagram = ({ color = "#FFFFFF" ,...props}) => (
   </svg>
 );
 
+export const Xlogo = ({ className = "w-8 h-8 text-black" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    shapeRendering="geometricPrecision"
+    textRendering="geometricPrecision"
+    imageRendering="optimizeQuality"
+    fillRule="evenodd"
+    clipRule="evenodd"
+    viewBox="0 0 512 509.64"
+    className={className}
+  >
+    <rect width="512" height="509.64" rx="115.61" ry="115.61" />
+    <path
+      fill="#fff"
+      fillRule="nonzero"
+      d="M323.74 148.35h36.12l-78.91 90.2 92.83 122.73h-72.69l-56.93-74.43-65.15 74.43h-36.14l84.4-96.47-89.05-116.46h74.53l51.46 68.04 59.53-68.04zm-12.68 191.31h20.02l-129.2-170.82H180.4l130.66 170.82z"
+    />
+  </svg>
+);
 
-export const Linkedin = ({ color = "#FFFFFF",...props}) => (
+export const LinkedInIcon = ({ className = "w-8 h-8 text-black" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="-143 145 512 512"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M329,145h-432c-22.1,0-40,17.9-40,40v432c0,22.1,17.9,40,40,40h432c22.1,0,40-17.9,40-40V185C369,162.9,351.1,145,329,145z M41.4,508.1H-8.5V348.4h49.9V508.1z M15.1,328.4h-0.4c-18.1,0-29.8-12.2-29.8-27.7c0-15.8,12.1-27.7,30.5-27.7 c18.4,0,29.7,11.9,30.1,27.7C45.6,316.1,33.9,328.4,15.1,328.4z M241,508.1h-56.6v-82.6c0-21.6-8.8-36.4-28.3-36.4 c-14.9,0-23.2,10-27,19.6c-1.4,3.4-1.2,8.2-1.2,13.1v86.3H71.8c0,0,0.7-146.4,0-159.7h56.1v25.1c3.3-11,21.2-26.6,49.8-26.6 c35.5,0,63.3,23,63.3,72.4V508.1z" />
+  </svg>
+);
+
+export const GitHubIcon = ({ className = "w-7 h-7 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 98 96" // Adjusted viewBox to fit the GitHub icon
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></g>
+    <g id="SVGRepo_iconCarrier">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"
+      />
+    </g>
+  </svg>
+);
+
+export const LinkIcon = ({ className = "w-7 h-7 text-gray-500" }) => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    {...props}
+    className={className}
+  >
+    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></g>
+    <g id="SVGRepo_iconCarrier">
+      <path
+        d="M21 9L21 3M21 3H15M21 3L13 11M10 5H7.8C6.11984 5 5.27976 5 4.63803 5.32698C4.07354 5.6146 3.6146 6.07354 3.32698 6.63803C3 7.27976 3 8.11984 3 9.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21H14.2C15.8802 21 16.7202 21 17.362 20.673C17.9265 20.3854 18.3854 19.9265 18.673 19.362C19 18.7202 19 17.8802 19 16.2V14"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+    </g>
+  </svg>
+);
+
+export const LinkChainIcon = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 32 32"
+    fill="currentColor" // Inherits the fill color from the parent
+    className={className} // Allows custom Tailwind classes for styling
+    style={{ fillRule: "evenodd", clipRule: "evenodd", strokeLinejoin: "round", strokeMiterlimit: 2 }}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M24.787,19.13l2.122,-2.121c3.317,-3.317 3.317,-8.704 -0,-12.021c-3.318,-3.317 -8.704,-3.317 -12.021,0c-0,0 -2.122,2.122 -2.122,2.122c-0.585,0.585 -0.585,1.535 0,2.121c0.586,0.585 1.536,0.585 2.122,-0l2.121,-2.121c2.146,-2.147 5.632,-2.147 7.778,-0c2.147,2.146 2.147,5.631 0,7.778c0,-0 -2.121,2.121 -2.121,2.121c-0.586,0.585 -0.586,1.536 -0,2.121c0.585,0.586 1.536,0.586 2.121,0Z" />
+    <path d="M7.11,12.766l-2.122,2.122c-3.317,3.317 -3.317,8.703 0,12.021c3.317,3.317 8.704,3.317 12.021,-0c0,-0 2.121,-2.122 2.121,-2.122c0.586,-0.585 0.586,-1.536 0,-2.121c-0.585,-0.586 -1.536,-0.586 -2.121,-0l-2.121,2.121c-2.147,2.147 -5.632,2.147 -7.778,0c-2.147,-2.146 -2.147,-5.632 -0,-7.778c-0,0 2.121,-2.121 2.121,-2.121c0.585,-0.586 0.585,-1.536 -0,-2.122c-0.586,-0.585 -1.536,-0.585 -2.121,0Z" />
+    <path d="M11.352,22.666l11.314,-11.314c0.585,-0.585 0.585,-1.536 -0,-2.121c-0.586,-0.586 -1.536,-0.586 -2.121,-0l-11.314,11.314c-0.586,0.585 -0.586,1.535 -0,2.121c0.585,0.585 1.536,0.585 2.121,-0Z" />
+  </svg>
+);
+export const WhatsAppIcon = ({ className = "w-8 h-8 text-black" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M16.8 5.7C14.4 2 9.5.9 5.7 3.2 2 5.5.8 10.5 3.2 14.2l.2.3-.8 3 3-.8.3.2c1.3.7 2.7 1.1 4.1 1.1 1.5 0 3-.4 4.3-1.2 3.7-2.4 4.8-7.3 2.5-11.1zm-2.1 7.7c-.4.6-.9 1-1.6 1.1-.4 0-.9.2-2.9-.6-1.7-.8-3.1-2.1-4.1-3.6-.6-.7-.9-1.6-1-2.5 0-.8.3-1.5.8-2 .2-.2.4-.3.6-.3H7c.2 0 .4 0 .5.4.2.5.7 1.7.7 1.8.1.1.1.3 0 .4.1.2 0 .4-.1.5-.1.1-.2.3-.3.4-.2.1-.3.3-.2.5.4.6.9 1.2 1.4 1.7.6.5 1.2.9 1.9 1.2.2.1.4.1.5-.1s.6-.7.8-.9c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.5.3.1.3.1.7-.1 1z" />
+  </svg>
+);
+
+export const CloseIcon = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className} // Allows custom Tailwind classes for styling
   >
     <path
-      d="M18 22V15C18 13.8954 17.1046 13 16 13C14.8954 13 14 13.8954 14 15V22H10"
-      stroke={color}
-      strokeWidth="1"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M10 22V15C10 11.6863 12.6863 9 16 9C19.3137 9 22 11.6863 22 15V22H18"
-      stroke={color}
-      strokeWidth="1"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <rect
-      x="3"
-      y="9"
-      width="4"
-      height="13"
-      stroke={color}
-      strokeWidth="1"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <circle
-      cx="5"
-      cy="4"
-      r="2"
-      stroke={color}
-      strokeWidth="1"
+      d="M19 5L5 19M5 5L9.5 9.5M12 12L19 19"
+      stroke="currentColor" // Inherits the stroke color from the parent
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
@@ -611,28 +694,313 @@ export const HamburgerIcon = () => (
   </svg>
 );
 
-
 export const LoaderIcon2 = ({ className = "w-6 h-6 text-gray-500" }) => (
   <svg
-  className={className} // Example Tailwind classes, customize as needed
-  viewBox="0 0 21 21"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-  <g id="SVGRepo_iconCarrier">
-    <g fill="none" fillRule="evenodd" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M10.5 3.5v2"></path>
-      <path d="M15.5 5.5l-1.5 1.5"></path>
-      <path d="M5.5 5.5l1.5 1.5"></path>
-      <path d="M10.5 17.5v-2"></path>
-      <path d="M15.5 15.5l-1.5-1.5"></path>
-      <path d="M5.5 15.5l1.5-1.5"></path>
-      <path d="M3.5 10.5h2"></path>
-      <path d="M15.5 10.5h2"></path>
+    className={className} // Example Tailwind classes, customize as needed
+    viewBox="0 0 21 21"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></g>
+    <g id="SVGRepo_iconCarrier">
+      <g
+        fill="none"
+        fillRule="evenodd"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M10.5 3.5v2"></path>
+        <path d="M15.5 5.5l-1.5 1.5"></path>
+        <path d="M5.5 5.5l1.5 1.5"></path>
+        <path d="M10.5 17.5v-2"></path>
+        <path d="M15.5 15.5l-1.5-1.5"></path>
+        <path d="M5.5 15.5l1.5-1.5"></path>
+        <path d="M3.5 10.5h2"></path>
+        <path d="M15.5 10.5h2"></path>
+      </g>
     </g>
-  </g>
-</svg>
+  </svg>
+);
 
+export const GmailIcon = ({ className = "w-8 h-8 text-gray-500" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 32"
+    fill="none"
+    className={className} // Allows custom Tailwind classes for styling
+  >
+    <path
+      d="M2 11.9556C2 8.47078 2 6.7284 2.67818 5.39739C3.27473 4.22661 4.22661 3.27473 5.39739 2.67818C6.7284 2 8.47078 2 11.9556 2H20.0444C23.5292 2 25.2716 2 26.6026 2.67818C27.7734 3.27473 28.7253 4.22661 29.3218 5.39739C30 6.7284 30 8.47078 30 11.9556V20.0444C30 23.5292 30 25.2716 29.3218 26.6026C28.7253 27.7734 27.7734 28.7253 26.6026 29.3218C25.2716 30 23.5292 30 20.0444 30H11.9556C8.47078 30 6.7284 30 5.39739 29.3218C4.22661 28.7253 3.27473 27.7734 2.67818 26.6026C2 25.2716 2 23.5292 2 20.0444V11.9556Z"
+      fill="white"
+    />
+    <path
+      d="M22.0515 8.52295L16.0644 13.1954L9.94043 8.52295V8.52421L9.94783 8.53053V15.0732L15.9954 19.8466L22.0515 15.2575V8.52295Z"
+      fill="#EA4335"
+    />
+    <path
+      d="M23.6231 7.38639L22.0508 8.52292V15.2575L26.9983 11.459V9.17074C26.9983 9.17074 26.3978 5.90258 23.6231 7.38639Z"
+      fill="#FBBC05"
+    />
+    <path
+      d="M22.0508 15.2575V23.9924H25.8428C25.8428 23.9924 26.9219 23.8813 26.9995 22.6513V11.459L22.0508 15.2575Z"
+      fill="#34A853"
+    />
+    <path
+      d="M9.94811 24.0001V15.0732L9.94043 15.0669L9.94811 24.0001Z"
+      fill="#C5221F"
+    />
+    <path
+      d="M9.94014 8.52404L8.37646 7.39382C5.60179 5.91001 5 9.17692 5 9.17692V11.4651L9.94014 15.0667V8.52404Z"
+      fill="#C5221F"
+    />
+    <path
+      d="M9.94043 8.52441V15.0671L9.94811 15.0734V8.53073L9.94043 8.52441Z"
+      fill="#C5221F"
+    />
+    <path
+      d="M5 11.4668V22.6591C5.07646 23.8904 6.15673 24.0003 6.15673 24.0003H9.94877L9.94014 15.0671L5 11.4668Z"
+      fill="#4285F4"
+    />
+  </svg>
+);
+
+export const MailIcon = ({ className = "w-8 h-8 text-gray-500" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className} // Allows custom Tailwind classes for styling
+  >
+    <path
+      d="M22,8.32V18a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V8.69L4,9.78l7.52,4.1A1,1,0,0,0,12,14a1,1,0,0,0,.5-.14L20,9.49Z"
+      fill="currentColor"
+    />
+    <path
+      d="M22,6h0L20,7.18l-8,4.67L4,7.5,2,6.4V6A2,2,0,0,1,4,4H20A2,2,0,0,1,22,6Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+export const SettingsIcon2 = ({ className = "w-8 h-8 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className} // Allows custom Tailwind classes for styling
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M10.65 3L9.93163 3.53449L9.32754 5.54812L7.47651 4.55141L6.5906 4.68143L4.68141 6.59062L4.55139 7.47652L5.5481 9.32755L3.53449 9.93163L3 10.65V13.35L3.53449 14.0684L5.54811 14.6725L4.55142 16.5235L4.68144 17.4094L6.59063 19.3186L7.47653 19.4486L9.32754 18.4519L9.93163 20.4655L10.65 21H13.35L14.0684 20.4655L14.6725 18.4519L16.5235 19.4486L17.4094 19.3185L19.3186 17.4094L19.4486 16.5235L18.4519 14.6724L20.4655 14.0684L21 13.35V10.65L20.4655 9.93163L18.4519 9.32754L19.4486 7.47654L19.3186 6.59063L17.4094 4.68144L16.5235 4.55142L14.6725 5.54812L14.0684 3.53449L13.35 3H10.65ZM10.4692 6.96284L11.208 4.5H12.792L13.5308 6.96284L13.8753 7.0946C13.9654 7.12908 14.0543 7.16597 14.142 7.2052L14.4789 7.35598L16.7433 6.13668L17.8633 7.25671L16.644 9.52111L16.7948 9.85803C16.834 9.9457 16.8709 10.0346 16.9054 10.1247L17.0372 10.4692L19.5 11.208V12.792L17.0372 13.5308L16.9054 13.8753C16.8709 13.9654 16.834 14.0543 16.7948 14.1419L16.644 14.4789L17.8633 16.7433L16.7433 17.8633L14.4789 16.644L14.142 16.7948C14.0543 16.834 13.9654 16.8709 13.8753 16.9054L13.5308 17.0372L12.792 19.5H11.208L10.4692 17.0372L10.1247 16.9054C10.0346 16.8709 9.94569 16.834 9.85803 16.7948L9.52111 16.644L7.25671 17.8633L6.13668 16.7433L7.35597 14.4789L7.2052 14.142C7.16597 14.0543 7.12908 13.9654 7.0946 13.8753L6.96284 13.5308L4.5 12.792L4.5 11.208L6.96284 10.4692L7.0946 10.1247C7.12907 10.0346 7.16596 9.94571 7.20519 9.85805L7.35596 9.52113L6.13666 7.2567L7.25668 6.13667L9.5211 7.35598L9.85803 7.2052C9.9457 7.16597 10.0346 7.12908 10.1247 7.0946L10.4692 6.96284ZM14.25 12C14.25 13.2426 13.2426 14.25 12 14.25C10.7574 14.25 9.75 13.2426 9.75 12C9.75 10.7574 10.7574 9.75 12 9.75C13.2426 9.75 14.25 10.7574 14.25 12ZM15.75 12C15.75 14.0711 14.0711 15.75 12 15.75C9.92893 15.75 8.25 14.0711 8.25 12C8.25 9.92893 9.92893 8.25 12 8.25C14.0711 8.25 15.75 9.92893 15.75 12Z"
+      fill="currentColor" // Inherits color from parent
+    />
+  </svg>
+);
+
+export const GoogleIcon = ({ className = "w-8 h-8" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="-3 0 262 262"
+    fill="none"
+    preserveAspectRatio="xMidYMid"
+    className={className} // Allows custom styling via Tailwind or other classes
+  >
+    <path
+      d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
+      fill="#4285F4"
+    />
+    <path
+      d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"
+      fill="#34A853"
+    />
+    <path
+      d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"
+      fill="#FBBC05"
+    />
+    <path
+      d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
+      fill="#EB4335"
+    />
+  </svg>
+);
+
+export const QuoteIconUp = ({ className = "w-8 h-8 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className} // Allows custom Tailwind classes for styling
+  >
+    <rect width="16" height="16" fill="none" />
+    <path
+      d="M16,3V1c-4.188,0-7,2.812-7,7v7h7V8h-5C11,4.916,12.916,3,16,3z M0,8v7h7V8H2c0-3.084,1.916-5,5-5V1C2.812,1,0,3.812,0,8z"
+      fill="currentColor" // Inherits color from parent
+    />
+  </svg>
+);
+
+export const Tag_Cross_Icon = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className} // Allows custom Tailwind classes for styling
+  >
+    <path d="M17 21H10.28C8.65999 21 7.10999 20.31 6.02999 19.12L2.49999 15.24C0.81999 13.4 0.81999 10.62 2.49999 8.77L6.02999 4.89C7.10999 3.69 8.65999 3 10.28 3H17C20.17 3 22.75 5.58 22.75 8.75V15.25C22.75 18.42 20.17 21 17 21ZM10.28 4.5C9.08999 4.5 7.93999 5.01 7.13999 5.89L3.59999 9.78C2.44999 11.05 2.44999 12.96 3.59999 14.23L7.12999 18.11C7.92999 18.99 9.07999 19.5 10.27 19.5H17C19.34 19.5 21.25 17.59 21.25 15.25V8.75C21.25 6.41 19.34 4.5 17 4.5H10.28Z" />
+    <path d="M16 15.22C15.81 15.22 15.62 15.15 15.47 15L10.53 10.05C10.24 9.76001 10.24 9.28001 10.53 8.99001C10.82 8.70001 11.3 8.70001 11.59 8.99001L16.53 13.94C16.82 14.23 16.82 14.71 16.53 15C16.38 15.15 16.19 15.22 16 15.22Z" />
+    <path d="M11.06 15.22C10.87 15.22 10.68 15.15 10.53 15C10.24 14.71 10.24 14.23 10.53 13.94L15.47 9C15.76 8.71 16.24 8.71 16.53 9C16.82 9.29 16.82 9.77 16.53 10.06L11.59 15C11.44 15.15 11.25 15.22 11.06 15.22Z" />
+  </svg>
+);
+
+export const ResetIcon = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 21 21"
+    fill="currentColor"
+    className={className} // Allows custom Tailwind classes for styling
+  >
+    <g fill="none" fillRule="evenodd" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" transform="translate(2 2)">
+      <path d="m12.5 1.5c2.4138473 1.37729434 4 4.02194088 4 7 0 4.418278-3.581722 8-8 8s-8-3.581722-8-8 3.581722-8 8-8" />
+      <path d="m12.5 5.5v-4h4" />
+    </g>
+  </svg>
+);
+
+export const CheckCircleIcon = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 15 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className} // Allows custom Tailwind classes for styling
+  >
+    <path
+      d="M4 7.5L7 10L11 5M7.5 14.5C3.63401 14.5 0.5 11.366 0.5 7.5C0.5 3.63401 3.63401 0.5 7.5 0.5C11.366 0.5 14.5 3.63401 14.5 7.5C14.5 11.366 11.366 14.5 7.5 14.5Z"
+      stroke="currentColor" // Inherits the text color from the parent
+    />
+  </svg>
+);
+
+export const ClockIcon = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className} // Allows custom Tailwind classes for styling
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 18.9767C15.866 18.9767 19 15.8531 19 12C19 8.14685 15.866 5.02326 12 5.02326C8.13401 5.02326 5 8.14685 5 12C5 15.8531 8.13401 18.9767 12 18.9767ZM12 8.44007C12.3866 8.44007 12.7 8.75243 12.7 9.13775V11.703L14.3518 13.286C14.6305 13.5531 14.6392 13.9947 14.3713 14.2725C14.1033 14.5502 13.6602 14.5589 13.3815 14.2918L11.5148 12.5029C11.3776 12.3714 11.3 12.1898 11.3 12V9.13775C11.3 8.75243 11.6134 8.44007 12 8.44007Z"
+      fill="currentColor" // Inherits the fill color from the parent
+    />
+    <path
+      d="M9.85849 2.07434C10.4136 1.99995 11.1129 1.99997 11.9515 2H12.0485C12.8871 1.99997 13.5864 1.99995 14.1415 2.07434C14.7275 2.15285 15.2565 2.32557 15.6816 2.74926C16.1067 3.17296 16.28 3.70021 16.3587 4.28421C16.3832 4.46531 16.3996 4.66181 16.4107 4.87353C15.1287 4.08373 13.6178 3.62791 12 3.62791C10.3822 3.62791 8.87125 4.08373 7.58934 4.87353C7.60039 4.66181 7.61682 4.46531 7.64125 4.28421C7.72003 3.70021 7.89332 3.17296 8.31843 2.74926C8.74353 2.32557 9.27254 2.15285 9.85849 2.07434Z"
+      fill="currentColor" // Inherits the fill color from the parent
+    />
+    <path
+      d="M15.6816 21.2507C16.1067 20.827 16.28 20.2998 16.3587 19.7158C16.3832 19.5347 16.3996 19.3382 16.4107 19.1265C15.1287 19.9163 13.6178 20.3721 12 20.3721C10.3822 20.3721 8.87125 19.9163 7.58934 19.1265C7.60039 19.3382 7.61682 19.5347 7.64125 19.7158C7.72003 20.2998 7.89332 20.827 8.31843 21.2507C8.74353 21.6744 9.27254 21.8471 9.85849 21.9257C10.4136 22 11.1129 22 11.9515 22H12.0485C12.8871 22 13.5864 22 14.1415 21.9257C14.7275 21.8471 15.2565 21.6744 15.6816 21.2507Z"
+      fill="currentColor" // Inherits the fill color from the parent
+    />
+  </svg>
+);
+
+export const ChatBotIcon = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 128 128"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className} // Allows custom Tailwind classes for styling
+  >
+    <g>
+      <g data-name="Glyph">
+        <path d="M73.01,49.52a5.534,5.534,0,0,0-5.49,5.5v5.86a5.534,5.534,0,0,0,5.49,5.5,5.713,5.713,0,0,0,5.51-5.7c-.02-1.36-.02-4.1,0-5.46A5.713,5.713,0,0,0,73.01,49.52Z" fill="currentColor"/>
+        <path d="M42.02,49.52a5.7,5.7,0,0,0-5.5,5.7c.01,1.36,0,4.1,0,5.46a5.676,5.676,0,0,0,5.49,5.7,5.6,5.6,0,0,0,5.51-5.5c-.02-1.47,0-4.39,0-5.86A5.542,5.542,0,0,0,42.02,49.52Z" fill="currentColor"/>
+        <path d="M91,66a41,41,0,0,0-26.354,9.235,11.991,11.991,0,0,1-2.514-3.222,4.481,4.481,0,0,0-5.067-1.982,4.358,4.358,0,0,0-3.27,4.24,24.909,24.909,0,0,0,2.628,11.686A26.459,26.459,0,0,0,54,97c0,17.093,16.6,31,37,31s37-13.907,37-31S111.4,66,91,66ZM71.5,101a4,4,0,1,1,4-4A4,4,0,0,1,71.5,101Zm20,0a4,4,0,1,1,4-4A4,4,0,0,1,91.5,101Zm19,0a4,4,0,1,1,4-4A4,4,0,0,1,110.5,101Z" fill="currentColor"/>
+        <path d="M9.516,72.205l.033,9.963c.072,22.007,15.756,33.7,45.356,33.827a1.51,1.51,0,0,0,1.256-2.33A30.079,30.079,0,0,1,51,97a29.349,29.349,0,0,1,1.918-10.43,1.5,1.5,0,0,0-.016-1.1c-.164-.4-.316-.8-.461-1.2a1.509,1.509,0,0,0-1.96-.888,27.107,27.107,0,0,0-3.364,1.662A16.042,16.042,0,0,1,38.16,87.55h-.042a14.62,14.62,0,0,1-14.5-13.174,36.244,36.244,0,0,1,8.815-28.112A33.27,33.27,0,0,1,57.515,35.2h.006c16.125,0,29.443,10.722,33.138,26.681a1.5,1.5,0,0,0,1.427,1.161,46.192,46.192,0,0,1,10.783,1.489,1.512,1.512,0,0,0,1.86-1.719C100.461,39.361,80.961,21.559,59.02,20.785V13.833a7,7,0,1,0-3,0v6.952C30.342,21.161,8.746,47.05,9.516,72.205Z" fill="currentColor"/>
+      </g>
+    </g>
+  </svg>
+);
+
+export const CropImage = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor" // Inherits the fill color from the parent
+    className={className} // Allows custom Tailwind classes for styling
+  >
+    <g>
+      <path fill="none" d="M0 0h24v24H0z" />
+      <path d="M3 3h2v2H3V3zm4 0h2v2H7V3zm4 0h2v2h-2V3zm4 0h2v2h-2V3zm4 0h2v2h-2V3zm0 4h2v2h-2V7zM3 19h2v2H3v-2zm0-4h2v2H3v-2zm0-4h2v2H3v-2zm0-4h2v2H3V7zm7.667 4l1.036-1.555A1 1 0 0 1 12.535 9h2.93a1 1 0 0 1 .832.445L17.333 11H20a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h2.667zM14 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+    </g>
+  </svg>
+);
+
+export const BuyMeACoffee = ({ className = "w-6 h-6 text-gray-500" }) => (
+  <svg
+    viewBox="0 0 32 32"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    className={className}
+  >
+    <g>
+      <path d="M9.197 0l-1.619 3.735h-2.407v3.359h0.921l0.943 5.975h-1.473l1.948 10.973 1.249-0.015 1.256 7.973h11.891l0.083-0.531 1.172-7.443 1.188 0.015 1.943-10.973h-1.407l0.937-5.975h1.011v-3.359h-2.557l-1.625-3.735zM9.901 1.073h12.057l1.025 2.375h-14.115zM6.235 4.803h19.525v1.228h-19.525zM6.839 14.136h18.183l-1.568 8.823-7.536-0.079-7.511 0.079z"></path>
+    </g>
+  </svg>
+);
+
+export const BellIcon = ({ className = "w-6 h-6 text-black" }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path
+      d="M9.002 17H5.606c-1.258 0-1.888 0-2.02-.098-.149-.11-.185-.175-.201-.36-.014-.164.37-.795 1.142-2.057.796-1.303 1.472-3.2 1.472-5.886 0-1.485.632-2.91 1.757-3.96C8.883 3.59 10.409 3 12 3c1.591 0 3.118.59 4.243 1.64 1.125 1.05 1.757 2.474 1.757 3.96 0 2.686.676 4.583 1.472 5.886.771 1.262 1.157 1.893 1.142 2.057-.016.185-.052.25-.201.36-.132.098-.761.098-2.02.098H15M9.002 17v1c0 1.657 1.343 3 3 3s3-1.343 3-3v-1M9.002 17H15"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const HeartBroken = ({ className = "w-6 h-6 text-red-500" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+  >
+    <path
+      d="M8.106 18.247C5.298 16.083 2 13.542 2 9.137 2 4.537 6.923 1.202 11.264 4.814l-1.454 3.391a.832.832 0 0 0 .254.907l2.833 2.024-2.467 2.878a.83.83 0 0 0 .039 1.018l1.7 1.7-.91 3.64c-.755-.253-1.516-.842-2.298-1.46a41.524 41.524 0 0 1-1.855-1.435z"
+      fill="currentColor"
+    />
+    <path
+      d="M12.812 20.345c.731-.265 1.468-.837 2.226-1.434.277-.218.564-.439.856-.664C18.702 16.083 22 13.542 22 9.137c0-4.515-4.741-7.81-9.021-4.517L11.427 8.24l3.009 2.149c.171.122.283.31.308.519.025.209-.038.419-.175.579l-2.548 2.973 1.509 1.509c.186.186.261.456.197.712l-.915 3.653z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+export const Heart = ({ className = "w-6 h-6 text-red-500" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    className={className}
+  >
+    <path
+      d="M2 9.137c0 4.863 4.019 7.454 6.962 9.774C10 19.73 11 20.5 12 20.5s2-.77 3.038-1.589C17.981 16.591 22 14 22 9.137 22 4.274 16.5.825 12 5.5 7.5.825 2 4.274 2 9.137z"
+      fill="currentColor"
+    />
+  </svg>
 );
