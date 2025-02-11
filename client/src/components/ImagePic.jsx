@@ -5,14 +5,6 @@ import { Heart, HeartBroken } from "@/icons/icon";
 
 
 
-const fadein=()=> {
-  document.querySelector(".girlImage").classList.add('scale-100');
-  document.querySelector(".girlImage").classList.add('opacity-1');
-  setInterval(() => {
-    document.querySelector(".girlImage").classList.add('flex');
-  }, 2000);
-};
-
 
 
 export default function ImagePic() {
@@ -28,7 +20,7 @@ export default function ImagePic() {
       setImg('/imgs/image.png');
       girlImage.classList.remove('scale-90');
       girlImage.classList.remove('opacity-0');
-    }, 1000);
+    }, 900);
  
  
   };
@@ -40,7 +32,7 @@ export default function ImagePic() {
           <HeartBroken className="w-12 h-12 text-[#E1306C]" />
         </div>
 
-        <div className="mainImg h-full max-w-96 flex flex-col items-start justify-center girlImage  transition-all duration-1000 ease-in-out">
+        <div className="mainImg h-full  max-w-96 sm:w-1/5 flex flex-col items-start justify-center girlImage  transition-all duration-1000 ease-in-out">
           <div className="mx-auto ">
             <Image id="girlImg"
               src={img}
@@ -61,8 +53,6 @@ export default function ImagePic() {
                 hello
               </h3>
             </div>
-          </div>
-
           <h2 className="cookie text-4xl mt-8 mb-2 italic">Bio</h2>
           <p className="courgette w-full  text-xs text-gray-300 tracking-wider">
             Kind-hearted and always up for a good conversation. I love trying
@@ -71,6 +61,8 @@ export default function ImagePic() {
             for a partner in crime who will support and encourage you, let's
             connect.
           </p>
+          </div>
+
         </div>
 
         <div id="heartIcon" className="heartbreak fixed top-1/2 right-1/4  bg-[#FF006A40] rounded-full p-4">
