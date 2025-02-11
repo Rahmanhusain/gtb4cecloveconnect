@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { hotp } from "otplib";
+
 import Secret from "@/Modal/Secret";
 import User from "@/Modal/User";
 import connectDB from "@/lib/DB/Dbconnection";

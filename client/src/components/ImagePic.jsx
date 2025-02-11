@@ -20,26 +20,26 @@ export default function ImagePic() {
       setImg('/imgs/image.png');
       girlImage.classList.remove('scale-90');
       girlImage.classList.remove('opacity-0');
-    }, 900);
+    }, 500);
  
  
   };
 
   return (
     <div className="px-6">
-      <div className="flex flex-row items-center justify-evenly min-h-[100dvh] ">
+      <div className="flex flex-row py-10 justify-evenly min-h-[100dvh] ">
         <div id="heartbreakIcon" className="heartbreak fixed top-1/2 left-1/4 bg-[#A100FF40] rounded-full cursor-pointer p-4" onClick={fadeout}>
           <HeartBroken className="w-12 h-12 text-[#E1306C]" />
         </div>
 
-        <div className="mainImg h-full  max-w-96 sm:w-1/5 flex flex-col items-start justify-center girlImage  transition-all duration-1000 ease-in-out">
-          <div className="mx-auto ">
+        <div className="mainImg h-full  max-w-96 flex flex-col items-start justify-center girlImage  transition-all duration-500 ease-in-out">
+          <div className="mx-auto">
             <Image id="girlImg"
               src={img}
               alt="girlimage"
               width={300}
               height={500}
-              className=" rounded-2xl h-[55vh] w-auto aspect-[39/49] object-cover  brightness-75"
+              className=" rounded-2xl h-[55vh] w-auto aspect-[39/49] object-cover brightness-75"
             />
             <h2 className="cookie text-4xl mt-4 italic">Lisa</h2>
             <div className="flex flex-row items-center justify-start gap-2 MervaleScript">
@@ -53,6 +53,7 @@ export default function ImagePic() {
                 hello
               </h3>
             </div>
+            </div>
           <h2 className="cookie text-4xl mt-8 mb-2 italic">Bio</h2>
           <p className="courgette w-full  text-xs text-gray-300 tracking-wider">
             Kind-hearted and always up for a good conversation. I love trying
@@ -61,7 +62,7 @@ export default function ImagePic() {
             for a partner in crime who will support and encourage you, let's
             connect.
           </p>
-          </div>
+         
 
         </div>
 

@@ -34,7 +34,7 @@ export default function ForgetPassComp() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email ,isforget:true}),
+        body: JSON.stringify({ email: email, isforget: true }),
       });
 
       if (!response.ok) {
@@ -43,7 +43,7 @@ export default function ForgetPassComp() {
       }
 
       const result = await response.json();
-      
+
       /* console.log(result); */
       return result.status;
     } catch (error) {
@@ -62,7 +62,7 @@ export default function ForgetPassComp() {
       /* const data = Object.fromEntries(formData); */
 
       const status = await SendOTP(formData.get("email"));
-     /*  console.log(status); */
+      /*  console.log(status); */
       if (status === 201) {
         setIsOtpOpen(true);
         propemailRef.current.email = formData.get("email");
@@ -71,14 +71,13 @@ export default function ForgetPassComp() {
       } else if (status == 409) {
         messageref.current = "User do not exist!";
         setisWarnOpen(true);
-      }else if (status == 504) {
+      } else if (status == 504) {
         messageref.current = "Server time Out please try Again !";
         setisWarnOpen(true);
       } else {
         messageref.current = "Something Went Wrong try again!";
         setisWarnOpen(true);
       }
-      
     }
   };
 
@@ -91,7 +90,6 @@ export default function ForgetPassComp() {
         <BackIcon size={30} /> Back to Home
       </CustomLink>
       <div className="flex flex-col items-center justify-center mt-10 sm:mt-0 px-6 py-8 mx-auto sm:min-h-screen lg:py-0 animate-dropped">
-       
         <div className="w-full bg-background rounded-lg shadow-xl md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1
@@ -193,13 +191,11 @@ export default function ForgetPassComp() {
               <button
                 type="submit"
                 className={`w-full text-text ${
-                  !isSending
-                    ? "bg-[#ff006aa7] text-white"
-                    : "bg-[#f71b772f]"
+                  !isSending ? "bg-[#ff006aa7] text-white" : "bg-[#f71b772f]"
                 } font-medium rounded-lg text-sm px-5 py-[0.65rem] flex items-center justify-center gap-2`}
               >
                 {isSending && (
-                  <MiniloadIcon className="w-4 h-4 text-text animate-spin-fast" />
+                  <MiniloadIcon className="w-5 h-5 text-[#db4784] animate-spin" />
                 )}
                 {!isSending ? "Reset Password" : `Please Wait`}
               </button>
@@ -208,8 +204,7 @@ export default function ForgetPassComp() {
                   href="/login"
                   className="font-medium text-hover hover:underline flex gap-1 items-center"
                 >
-                  
-                    <BackIcon size={18} />
+                  <BackIcon size={18} />
                   Back To Login
                 </CustomLink>
               </div>

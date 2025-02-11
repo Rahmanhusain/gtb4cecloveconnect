@@ -42,7 +42,7 @@ export default function Register() {
         return response.status;
       }
       const result = await response.json();
-      /* console.log(result); */
+      console.log(result);
       return result.status;
     } catch (error) {
       console.error("Fetch error:", error);

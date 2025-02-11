@@ -131,7 +131,7 @@ export default function Login() {
               <div className="flex items-center justify-between">
                 <CustomLink
                   href="/forgotpassword"
-                  className="text-sm font-medium text-hover hover:underline"
+                  className="text-base font-medium text-[#f6588d] hover:underline"
                 >
                   Forgot password?
                 </CustomLink>

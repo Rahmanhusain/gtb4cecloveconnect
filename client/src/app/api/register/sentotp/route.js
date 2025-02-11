@@ -39,8 +39,8 @@ const addsecret = async (email, secret, otp) => {
         </p>
       </div>
     `;
-    await sendOtpEmail(email, htmlContent, "OTP to Create Account");
-    await newSecret.save();
+/*     await sendOtpEmail(email, htmlContent, "OTP to Create Account");
+ */    await newSecret.save();
 
   } catch (error) {
     if (error.message === "User already exists") {
@@ -106,7 +106,7 @@ export async function POST(request) {
 
     return NextResponse.json({
       message: "Email send successfully ",
-      otp: 'loda lega bhai....',
+      otp: otp,
       status: 201,
     });
   } catch (error) {
