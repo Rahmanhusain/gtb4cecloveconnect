@@ -11,6 +11,14 @@ const fadeout=()=> {
   }, 2000);
 };
 
+const fadein=()=> {
+  document.querySelector(".girlImage").classList.add('scale-100');
+  document.querySelector(".girlImage").classList.add('opacity-1');
+  setInterval(() => {
+    document.querySelector(".girlImage").classList.add('flex');
+  }, 2000);
+};
+
 
 
 export default function ImagePic() {
