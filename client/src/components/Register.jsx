@@ -89,10 +89,10 @@ export default function Register() {
       </CustomLink>
 
 
-      <div className="flex flex-col items-center justify-center px-3 sm:px-6 mx-auto min-h-[100dvh]">
+      <div className="flex flex-col items-center justify-center px-3 sm:px-6 mx-auto min-h-[calc(100dvh-4.6rem)] animate-dropped">
         <CustomLink
           href="/"
-          className="flex items-center mb-6 text-2xl font-semibold text-text"
+          className="flex items-center text-2xl font-semibold text-text"
         >
           {/*           <Image className="w-16 h-auto" loading="lazy" src={logo} alt="logo" />
            */}{" "}

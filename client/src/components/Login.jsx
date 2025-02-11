@@ -75,17 +75,17 @@ export default function Login() {
         <BackIcon size={30} />
       </CustomLink>
 
-      <div className="flex flex-col items-center justify-center px-3 sm:px-6 mx-auto min-h-screen lg:py-0 animate-dropped">
+      <div className="flex flex-col items-center justify-center px-3 sm:px-6 mx-auto min-h-[calc(100dvh-4.6rem)]   animate-dropped">
         <CustomLink
           href="/"
-          className="flex items-center mb-6 text-2xl font-semibold text-text"
+          className="flex items-center text-2xl font-semibold text-text"
         >
           {/*           <Image className="w-16 h-auto" src={logo} alt="logo" />
            */}{" "}
         </CustomLink>
-        <div className="w-full bg-background rounded-lg shadow-xl  md:mt-0 sm:max-w-md xl:p-0">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-2xl text-[#db4784] font-bold leading-tight tracking-tight text-text *: md:text-2xl">
+        <div className="w-full bg-background rounded-lg shadow-xl  md:mt-0 sm:max-w-md xl:p-0 ">
+          <div className=" space-y-4 md:space-y-6 sm:p-8">
+            <h1 className="text-2xl text-[#db4784] font-bold leading-tight tracking-tight md:text-2xl">
               Login To Your Account
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={Submit}>

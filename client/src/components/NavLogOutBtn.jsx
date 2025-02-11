@@ -6,7 +6,7 @@ import { SetUser } from "@/lib/store/features/AuthSlice";
 import { useRouter } from "next/navigation";
 import { SetUserData } from "@/lib/store/features/UserSlice";
 import Image from "next/image";
-import { LoaderIcon2 } from "@/icons/icon";
+import { HeartStrokedIcon, LoaderIcon2 } from "@/icons/icon";
 
 function NavLogOutBtn() {
   const dispatch = useAppDispatch();
@@ -24,7 +24,7 @@ function NavLogOutBtn() {
         },
       });
       const result = await res.json();
-    
+
       setisjwtverifying(false);
       if (result.status === 201) {
         console.log(result.data, "verifytoekn run");
@@ -40,28 +40,51 @@ function NavLogOutBtn() {
       }
     };
     if (user.email === null) {
-     /*  console.log("store already contain data"); */
+      /*  console.log("store already contain data"); */
       verifyToken();
     }
   }, [router]);
 
   return (
-    <div className="w-auto">
+    <div className="w-auto h-full">
       {user.email === null ? (
-        <Link
-          href="/login"
-          className={`px-7 py-3 w-full md:w-auto ${isjwtverifying?'bg-gray-300':'text-white bg-primary hover:bg-hover hover:shadow-xl'} rounded-lg flex items-center gap-2 justify-center`}
-        >
-         {isjwtverifying?<LoaderIcon2 className="w-5 h-5 text-black animate-spin" />:"Login"}
-        </Link>
+        <div className="flex flex-row items-center justify-evenly text-lg gap-3 w-fit cookie h-full ">
+          <Link
+            href="/register"
+            className=" py-1 px-2 rounded-lg border-2 border-[#bd145b] w-20 text-center"
+          >
+            SignUp
+          </Link>
+          <Link
+            href="/login"
+            className="py-1 px-2 rounded-lg border-2 border-[#bd145b] w-20 text-center"
+          >
+            Login
+          </Link>
+        </div>
       ) : (
-        <Link
-          href="/profile"
-          className="flex items-center w-10 h-full gap-2 justify-center"
-        >
-          <Image className="rounded-full h-full ring-2 ring-primary ring-offset-2" loading="lazy" src={user.profilephotosrc} width={35} height={35} alt="logo" />
-          <div className="md:hidden font-serif text-lg">Profile</div>
-        </Link>
+        <div className="flex flex-row items-center justify-evenly text-lg gap-4 w-fit cookie h-full">
+          <Link
+            href="/mymatches"
+            className="flex items-center w-fit h-full gap-2 py-2 justify-center relative"
+          >
+              <HeartStrokedIcon className="w-10 h-10 text-white" />
+              <span className="absolute w-3 h-3 bg-red-700 rounded-full ring-2 ring-black top-4 right-0"></span>
+          </Link>
+          <Link
+            href="/profile"
+            className="flex items-center w-fit h-full gap-2 py-2.5 justify-center"
+          >
+            <Image
+              className="rounded-full h-full w-full aspect-square border"
+              loading="lazy"
+              src={user.profilephotosrc}
+              width={35}
+              height={35}
+              alt="logo"
+            />
+          </Link>
+        </div>
       )}
     </div>
   );

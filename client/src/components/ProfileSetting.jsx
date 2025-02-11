@@ -17,7 +17,7 @@ import { ResetUserData } from "@/lib/store/features/UserSlice";
 import WarningModal from "./WarningModal";
 
 export default function ProfileSetting() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [showPasswordSign, setShowPasswordSign] = useState(false);
@@ -32,7 +32,7 @@ export default function ProfileSetting() {
   const user = useAppSelector((state) => state.Authenticator);
   const userdata = useAppSelector((state) => state.UserData);
 
-  useEffect(() => {
+/*   useEffect(() => {
     const verifyToken = async () => {
       const res = await fetch("/api/verifytoken", {
         method: "POST",
@@ -43,7 +43,7 @@ export default function ProfileSetting() {
       const result = await res.json();
 
       if (result.status === 201) {
-        /* console.log(result.data, "verifytoekn run"); */
+       
         dispatch(
           SetUser({
             email: result.data.email,
@@ -55,7 +55,7 @@ export default function ProfileSetting() {
         setprofilephotosrc(result.data.profilephotosrc);
         setShow(true);
       } else {
-        router.push("/login"); // Redirect to /login if token is invalid
+        router.push("/login"); 
       }
     };
     if (user.email === null) {
@@ -64,10 +64,10 @@ export default function ProfileSetting() {
       setprofilephotosrc(user.profilephotosrc);
       setShow(true);
     }
-  }, []);
+  }, []); */
 
-  useEffect(() => {
-    /* console.log("i run"); */
+/*   useEffect(() => {
+   
     if (userdata) {
       const initialProfile = () => {
         return {
@@ -80,7 +80,7 @@ export default function ProfileSetting() {
       setProfile(initialProfile());
       setEditingProfile(initialProfile());
     }
-  }, [userdata]);
+  }, [userdata]); */
 
   const updateProfile = async () => {
     const res = await fetch("/api/updateprofile", {
@@ -169,9 +169,9 @@ export default function ProfileSetting() {
 
   return (
     <>
-      <div className="w-[47rem] mx-3 my-5 p-5 border border-gray-300 rounded-lg bg-white">
+      <div className="w-[47rem] mx-3 my-5 p-5 border border-[#373738a3] rounded-lg">
         <h1 className="text-2xl mb-8 font-bold font-serif ">Your Profile</h1>
-        <div className="flex items-center gap-6 mb-8">
+        <div className="flex flex-col items-center gap-6 mb-8">
           <div
             className="relative flex flex-col items-center gap-3 cursor-pointer"
             onClick={() => {
@@ -182,7 +182,7 @@ export default function ProfileSetting() {
               src={profilephotosrc}
               width={70}
               height={70}
-              className="rounded-full ring-4 ring-primary ring-offset-4"
+              className="rounded-2xl h-[55vh] w-auto aspect-[39/49] object-cover brightness-75"
               alt="profile"
             />
             <p className="text-text flex gap-1 items-center text-xs">
@@ -195,14 +195,14 @@ export default function ProfileSetting() {
             </p>
           </div>
           <div>
-            <h3 className="text-xl break-words">{profile.Profilename}</h3>
-            <p className="text-gray-500 break-words">{profile.Email}</p>
+            <h3 className="text-xl break-words courgette">{profile.Profilename}Rahman Husain</h3>
+            <p className="text-gray-500 break-words courgette">{profile.Email}rahman@gmail.com</p>
           </div>
         </div>
 
         {Object.keys(profile).map((field) => (
           <div key={field} className="mb-2">
-            <label className="block mb-1 font-bold capitalize">{field}</label>
+            <label className="block mb-1 text-xl capitalize">{field}</label>
             {isEditing[field] ? (
               <div className="flex mb-4 flex-col gap-2 md:flex-row">
                 <div className="w-full relative">
@@ -225,17 +225,17 @@ export default function ProfileSetting() {
                       }
                       handleChange(e);
                     }}
-                    className="flex-1 p-2 w-full border border-gray-300 rounded mr-2"
+                    className="flex-1 p-2 w-full bg-transparent courgette text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none rounded-xl mr-2"
                   />
                   {field === "Password" &&
                     (!showPasswordSign ? (
                       <EyeClose
-                        className={`absolute right-2 top-2 cursor-pointer `}
+                        className={`absolute right-2 top-2 cursor-pointer text-[#928b92]`}
                         onClick={togglePasswordVisibilitySign}
                       />
                     ) : (
                       <EyeOpen
-                        className={`absolute right-2 top-2 cursor-pointer `}
+                        className={`absolute right-2 top-2 cursor-pointer text-[#928b92] `}
                         onClick={togglePasswordVisibilitySign}
                       />
                     ))}
@@ -244,37 +244,37 @@ export default function ProfileSetting() {
                 <div className="flex space-x-2">
                   <button
                     onClick={() => handleSave(field)}
-                    className="bg-purple-200 border border-purple-600 rounded px-4 py-2"
+                    className=" bg-[#bd145b] rounded-xl px-4 py-2"
                   >
                     Okay
                   </button>
                   <button
                     onClick={() => handleCancel(field)}
-                    className="border border-purple-600 rounded px-4 py-2"
+                    className="border border-[#bd145b] rounded-xl px-4 py-2"
                   >
                     Cancel
                   </button>
                 </div>
               </div>
             ) : (
-              <div className="flex justify-between items-center mb-4">
-                <span>
+              <div className="flex justify-between items-center mb-4 ">
+                <span className="text-gray-400 pl-2">
                   {field === "Password" ? "********" : profile[field]}
                 </span>
                 <button
                   onClick={() => handleEdit(field)}
-                  className="border border-purple-600 rounded px-4 py-2"
+                  className="border border-[#bd145b] rounded px-4 py-2"
                 >
                   Edit
                 </button>
               </div>
             )}
-            <hr className="my-2 border-gray-300" />
           </div>
+  
         ))}
         <div className="flex justify-between mt-7">
           <button
-            className="flex items-center px-5 gap-1 py-2   text-white bg-primary hover:bg-hover hover:shadow-xl rounded-lg"
+            className="flex items-center px-5 gap-1 py-2   text-white border border-[#ff006aa7] rounded-lg"
             onClick={async () => {
               await fetch("/api/logout", {
                 method: "POST",
@@ -302,10 +302,8 @@ export default function ProfileSetting() {
             <button
               disabled={!canSave}
               className={`flex items-center px-5 gap-1 py-2 ${
-                canSave ? "text-gray-100" : "text-text"
-              } border ${
-                canSave ? "bg-primary hover:bg-hover" : "bg-gray-300"
-              }  border-gray-300  rounded-lg`}
+                canSave ? "bg-[#ff006aa7] hover:bg-[#ff006ac3] cursor-pointer" : "bg-[#f71b772f] cursor-not-allowed"
+              } rounded-lg`}
               onClick={async () => {
                 setisSaving(true);
                 await updateProfile();

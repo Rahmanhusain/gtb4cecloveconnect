@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const CounterSchema = new mongoose.Schema({
   sequenceName: {
-    type: String,
+    type: Number,
     required: true,
     unique: true,
   },
@@ -16,12 +16,16 @@ const Counter = mongoose.models.Counter || mongoose.model("Counter", CounterSche
 
 const UserSchema = new mongoose.Schema({
   userid: {
-    type: String,
+    type: Number,
     unique: true,
   },
   Profilename: {
     type: String,
     trim: true,
+    default: null,
+  },
+  gender: {
+    type: String,
     default: null,
   },
   email: {
@@ -38,14 +42,46 @@ const UserSchema = new mongoose.Schema({
   phoneNumber: {
     type: String,
   },
+  matchrequest: {
+    type: [Number],
+    default: [],
+  },
+  matched: {
+    type: Array,
+    default: [],
+  },
+  matchnotification: {
+    type: Boolean,
+    default: false,
+  },
+  socials: {
+    type: Array,
+    default: [],
+  },
   profilephotosrc: {
     type: String,
     default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s",
+  },
+  keywords: {
+    type: Array,
+    default: [],
+  },
+  bio: {
+    type: String,
+    default: "",
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
+});
+
+// Pre-save hook to sort `matchrequest` array in ascending order
+UserSchema.pre("save", function (next) {
+  if (this.matchrequest && this.matchrequest.length > 0) {
+    this.matchrequest.sort((a, b) => a - b);
+  }
+  next();
 });
 
 // Pre-save hook to assign unique `userid` if not present
@@ -58,7 +94,7 @@ UserSchema.pre("save", async function (next) {
         { new: true, upsert: true }
       );
 
-      this.userid = `th-${String(counter.sequenceValue).padStart(3, "0")}`;
+      this.userid = counter.sequenceValue;
       next();
     } catch (error) {
       next(error);
