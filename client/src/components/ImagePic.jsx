@@ -3,18 +3,27 @@ import React from "react";
 import Image from "next/image";
 import { Heart, HeartBroken } from "@/icons/icon";
 
-const fadeout=()=> {
-  document.querySelector(".girlImage").classList.add('scale-90');
-  document.querySelector(".girlImage").classList.add('opacity-0');
-  setInterval(() => {
-    document.querySelector(".girlImage").classList.add('hidden');
-  }, 2000);
-};
+
 
 
 
 export default function ImagePic() {
+ 
+  const [img, setImg] = React.useState('/imgs/bla.jpg');
 
+  const fadeout=()=> {
+    const girlImage = document.querySelector(".girlImage");
+    girlImage.classList.add('scale-90');
+    girlImage.classList.add('opacity-0');
+
+    setTimeout(() => {
+      setImg('/imgs/image.png');
+      girlImage.classList.remove('scale-90');
+      girlImage.classList.remove('opacity-0');
+    }, 1000);
+ 
+ 
+  };
 
   return (
     <div className="px-6">
@@ -26,7 +35,7 @@ export default function ImagePic() {
         <div className="mainImg h-full max-w-96 flex flex-col items-start justify-center girlImage  transition-all duration-1000 ease-in-out">
           <div className="mx-auto ">
             <Image id="girlImg"
-              src='/bla.jpg'
+              src={img}
               alt="girlimage"
               width={300}
               height={500}

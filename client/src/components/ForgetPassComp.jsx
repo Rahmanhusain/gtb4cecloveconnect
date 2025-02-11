@@ -6,8 +6,6 @@ import OTPhandle from "./OTPhandle";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import { SetUser } from "@/lib/store/features/AuthSlice";
 import WarningModal from "./WarningModal";
-import Image from "next/image";
-import logo from "../assets/logo.png";
 
 export default function ForgetPassComp() {
   const [isOtpOpen, setIsOtpOpen] = useState(false);
@@ -93,12 +91,7 @@ export default function ForgetPassComp() {
         <BackIcon size={30} /> Back to Home
       </CustomLink>
       <div className="flex flex-col items-center justify-center mt-10 sm:mt-0 px-6 py-8 mx-auto sm:min-h-screen lg:py-0 animate-dropped">
-        <CustomLink
-          href="/"
-          className="flex items-center mb-6 text-2xl font-semibold text-text"
-        >
-          <Image className="w-16 h-auto" loading="lazy" src={logo} alt="logo" />
-        </CustomLink>
+       
         <div className="w-full bg-background rounded-lg shadow-xl md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1
@@ -121,7 +114,7 @@ export default function ForgetPassComp() {
                   type="email"
                   name="email"
                   id="email"
-                  className="border border-gray-200 placeholder-gray-400 outline-none text-text text-sm rounded-lg focus:border- block w-full p-2.5"
+                  className="bg-transparent courgette text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none text-text rounded-full focus:border-primary block w-full p-2.5"
                   placeholder="name@company.com"
                   required
                 />
@@ -143,7 +136,7 @@ export default function ForgetPassComp() {
                   title="password should be atleast 8 digits and one special character."
                   pattern="(?=.*[\W_]).{2,}"
                   placeholder="••••••••"
-                  className=" border border-gray-200 placeholder-gray-400 outline-none text-text text-sm rounded-lg focus:border- block w-full p-2.5"
+                  className="bg-transparent courgette text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none text-text rounded-full focus:border-primary block w-full p-2.5"
                   required
                 />
                 <span
@@ -180,13 +173,13 @@ export default function ForgetPassComp() {
                       ? setcolormatch(true)
                       : setcolormatch(false);
                   }}
-                  className={`border ${
-                    colormatch ? "border-gray-200" : "border-red-500"
-                  } focus:border-blue-500  ${
+                  className={`bg-transparent border-2 ${
+                    colormatch ? "border-[#717071bf] " : "border-red-500"
+                  }   ${
                     colormatch
                       ? "focus:border-green-500"
                       : "focus:border-red-500"
-                  } placeholder-gray-400 outline-none text-text text-sm rounded-lg block w-full p-2.5`}
+                  } placeholder-gray-400 outline-none courgette text-sm rounded-full block w-full p-2.5`}
                   required
                 />
                 <span
@@ -201,8 +194,8 @@ export default function ForgetPassComp() {
                 type="submit"
                 className={`w-full text-text ${
                   !isSending
-                    ? "bg-primary hover:bg-hover focus:ring-4 focus:outline-none focus:ring-blue-500 text-white"
-                    : "border"
+                    ? "bg-[#ff006aa7] text-white"
+                    : "bg-[#f71b772f]"
                 } font-medium rounded-lg text-sm px-5 py-[0.65rem] flex items-center justify-center gap-2`}
               >
                 {isSending && (
