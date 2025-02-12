@@ -27,7 +27,7 @@ function NavLogOutBtn() {
 
       setisjwtverifying(false);
       if (result.status === 201) {
-        console.log(result.data, "verifytoekn run");
+        console.log(result.data, "verifytoken run");
         dispatch(
           SetUser({
             email: result.data.email,
