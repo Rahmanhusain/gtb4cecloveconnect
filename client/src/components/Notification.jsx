@@ -24,7 +24,7 @@ export default function Notification() {
                 </div>
                 <div className='text-gray-300 flex flex-col justify-between w-full'>
                     <h1 className='text-sm w-full'>You have a new match with Lisa, Check out their full profile</h1>
-                    <h2 className='text-xs w-full text-gray-400 text-right'>Click here to view</h2>
+                    <h2 className='text-xs w-full text-gray-400 text-left'>Click here to view</h2>
                 </div>
 
             </div>
