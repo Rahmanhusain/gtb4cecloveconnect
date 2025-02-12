@@ -43,11 +43,11 @@ export default function ImagePic() {
                 height={500}
                 className="rounded-2xl w-full h-full object-cover brightness-75"
               />
-              <div id="heartbreakIcon" className="heartbreak flex sm:hidden  absolute bottom-0 left-0  bg-[#A100FF40] rounded-full cursor-pointer p-4" onClick={fadeout}>
+              <div id="heartbreakIcon" className="heartbreak flex sm:hidden  absolute bottom-0 left-0 z-10  bg-[#A100FF40] rounded-full cursor-pointer p-4" onClick={fadeout}>
                 <HeartBroken className="w-8 h-8 text-[#E1306C]" />
               </div>
 
-              <div id="heartIcon" className="heartbreak flex sm:hidden  absolute bottom-0 right-0 bg-[#FF006A40] rounded-full p-4" onClick={fadeout}>
+              <div id="heartIcon" className="heartbreak flex sm:hidden  absolute bottom-0 right-0 z-10 bg-[#FF006A40] rounded-full p-4" onClick={fadeout}>
                 <Heart className="w-8 h-8 text-[#E1306C]" />
               </div>
 
@@ -83,7 +83,7 @@ export default function ImagePic() {
         </div>
 
       </div>
-      <div id="hearts-alpaca" className="hearts fixed bottom-0 left-0 opacity-50 sm:opacity-100">
+      <div id="hearts-alpaca" className="hearts -z-10 fixed bottom-0 left-0 opacity-50 sm:opacity-100">
         <div className="heart"></div>
         <div className="heart"></div>
         <div className="heart"></div>
