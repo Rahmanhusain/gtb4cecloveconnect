@@ -66,6 +66,7 @@ export default function Register() {
         propemailRef.current.email = formData.get("email");
         propemailRef.current.name = formData.get("name");
         propemailRef.current.password = formData.get("confirmpassword");
+        propemailRef.current.enrollmentno = formData.get("rollno");
       } else if (status == 409) {
         messageref.current = "User already exist Login instead!";
         setisWarnOpen(true);

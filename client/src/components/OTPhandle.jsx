@@ -59,7 +59,7 @@ const OTPhandle = ({ setIsOtpOpen, propemailRef,isforget }) => {
       const res = await fetch("/api/register/verifyotp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: propemailRef.email,name:propemailRef.name, otp: otp ,password:propemailRef.password}),
+        body: JSON.stringify({ email: propemailRef.email,name:propemailRef.name, otp: otp ,password:propemailRef.password,enrollmentno:propemailRef.enrollmentno}),
       });
       const result = await res.json();
      /*  console.log(result); */
@@ -133,7 +133,7 @@ const OTPhandle = ({ setIsOtpOpen, propemailRef,isforget }) => {
   };
 
   return (
-    <div className="absolute top-0 left-0 right-0 min-h-full bg-transparent flex items-center justify-center backdrop-blur-xl">
+    <div className="fixed top-0 left-0 right-0 min-h-full bg-transparent flex items-center justify-center backdrop-blur-xl">
       <div
         className={`bg-[#322e2fad] p-6 rounded-lg shadow-xl max-w-sm w-full flex flex-col items-center m-4 relative ${
           !closeanim ? "animate-popIn" : "animate-popOut"

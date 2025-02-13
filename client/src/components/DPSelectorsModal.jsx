@@ -9,7 +9,7 @@ function DPSelectorsModal({ setDpmodOpen ,setprofilephoto,setCansave}) {
   return (
     <section className="fixed overflow-y-auto top-20 left-0 right-0 bottom-0 bg-transparent flex justify-center backdrop-blur-md">
       <div
-        className={`border bg-light-night-black rounded-xl flex flex-col w-[31.25rem] h-fit my-7 mx-3 gap-5 py-5 bg-opacity-90 relative ${
+        className={`bg-[#141415] bg-light-night-black rounded-xl flex flex-col w-[31.25rem] h-fit my-7 mx-3 gap-5 py-5 relative ${
           !closeanim ? "animate-popIn" : "animate-popOut"
         } ${closeanim && "scale-0"}`}
       >
@@ -28,9 +28,9 @@ function DPSelectorsModal({ setDpmodOpen ,setprofilephoto,setCansave}) {
         <Suspense
           fallback={
             <div className="flex flex-row gap-2 justify-center items-center py-4">
-              <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce"></div>
-              <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]"></div>
-              <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]"></div>
+              <div className="w-4 h-4 rounded-full bg-[#ff006aa7] animate-bounce"></div>
+              <div className="w-4 h-4 rounded-full bg-[#ff006aa7] animate-bounce [animation-delay:-.3s]"></div>
+              <div className="w-4 h-4 rounded-full bg-[#ff006aa7] animate-bounce [animation-delay:-.5s]"></div>
             </div>
           }
         >

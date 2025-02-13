@@ -3,17 +3,19 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { SetUser } from "@/lib/store/features/AuthSlice";
-import { useRouter } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { SetUserData } from "@/lib/store/features/UserSlice";
 import Image from "next/image";
 import { HeartStrokedIcon, LoaderIcon2 } from "@/icons/icon";
+import Notification from "./Notification";
 
 function NavLogOutBtn() {
   const dispatch = useAppDispatch();
-  const router = useRouter();
-  // State to track token verification result
+  const pathname = usePathname(); // Get the current pathname
+  const searchParams = useSearchParams(); // Get the current search params
   const user = useAppSelector((state) => state.Authenticator);
   const [isjwtverifying, setisjwtverifying] = useState(true);
+  const [openNotification, setopenNotification] = useState(false);
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -36,14 +38,15 @@ function NavLogOutBtn() {
           })
         );
         dispatch(SetUserData(result.data));
-        /* setShow(true); */
       }
     };
-    if (user.email === null) {
-      /*  console.log("store already contain data"); */
+
+    if (!user.email) {
       verifyToken();
+    }else{
+      console.log("user.email is not null")
     }
-  }, [router]);
+  }, [pathname, searchParams, user.email, dispatch]); // Re-run when pathname or searchParams change
 
   return (
     <div className="w-auto h-full">
@@ -63,20 +66,20 @@ function NavLogOutBtn() {
           </Link>
         </div>
       ) : (
-        <div className="flex flex-row items-center justify-evenly text-lg gap-4 w-fit cookie h-full">
-          <Link
-            href="/mymatches"
+        <div className="flex flex-row items-center justify-evenly text-lg gap-6 w-fit cookie h-full">
+          <button
+          onClick={()=>setopenNotification(true)}
             className="flex items-center w-fit h-full gap-2 py-2 justify-center relative"
           >
-              <HeartStrokedIcon className="w-10 h-10 text-white" />
-              <span className="absolute w-3 h-3 bg-red-700 rounded-full ring-2 ring-black top-4 right-0"></span>
-          </Link>
+            <HeartStrokedIcon className="w-11 h-11 text-white" />
+            <span className="absolute w-3 h-3 bg-red-700 rounded-full ring-2 ring-black top-4 right-0"></span>
+          </button>
           <Link
             href="/profile"
-            className="flex items-center w-fit h-full gap-2 py-2.5 justify-center"
+            className="flex items-center w-fit h-full gap-2 py-[0.88rem] justify-center"
           >
             <Image
-              className="rounded-full h-full w-full aspect-square border"
+              className="rounded-full object-contain h-full w-full aspect-square ring-[0.1875rem] ring-offset-[0.1875rem] ring-offset-black ring-[#bd145b]"
               loading="lazy"
               src={user.profilephotosrc}
               width={35}
@@ -86,6 +89,10 @@ function NavLogOutBtn() {
           </Link>
         </div>
       )}
+
+      {
+        openNotification && <Notification setopenNotification={setopenNotification} />
+      }
     </div>
   );
 }

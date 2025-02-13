@@ -9,6 +9,11 @@
   font-family: "MervaleScript";
   src: url('/font/MervaleScript.ttf') format('truetype');
 }
+*{
+  margin: 0;
+  padding: 0;
+
+}
 .cookie {
   font-family: "Cookie", serif;
 }
@@ -29,6 +34,7 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   color: white;
+
 }
 
 .hearts {
@@ -107,3 +113,17 @@ body {
  .heart:nth-child(4) {
    animation-delay: 4.5s;
  }
+
+ .custom-scrollbar::-webkit-scrollbar-track {
+  border-radius: 10px; /* Rounded track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px; /* Rounded thumb */
+  background: #f81d66a8; /* Track color */
+  transition: background 0.5s ease-in-out;
+}
+.custom-scrollbar:hover::-webkit-scrollbar-thumb{
+  border-radius: 10px; /* Rounded thumb */
+  background: #615d5e75; /* Track color */
+}

@@ -4,15 +4,17 @@ import { BackIcon, MiniloadIcon } from "@/icons/icon";
 import { EyeClose, EyeOpen } from "@/icons/icon";
 import { useRef, useState } from "react";
 import WarningModal from "./WarningModal";
-import Image from "next/image";
+/* import Image from "next/image"; */
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/lib/hooks/hooks";
+import { SetUser } from "@/lib/store/features/AuthSlice";
 
 export default function Login() {
   const [isCfmPassVisible, setIsCfmPassVisible] = useState(false);
   const [isWarnOpen, setisWarnOpen] = useState(false);
   const [isloginsuccess, setisloginsuccess] = useState(false);
   const messageref = useRef(null);
-  /*  const dispatch=useAppDispatch(); */
+   const dispatch=useAppDispatch();
   const router = useRouter();
 
   const sendloginReq = async (email, password, userType) => {
@@ -60,9 +62,8 @@ export default function Login() {
       setisloginsuccess(false);
     } else {
       console.log("login successful");
-      /*   dispatch(SetUser({ email: result.data.email, name: result.data.name })); */
-      /* setisloginsuccess(false)  */
-      alert("Login Successfull welcome back!");
+/*         dispatch(SetUser({ email: result.data.email, name: result.data.name,profilephotosrc: result.data.profilephotosrc }));
+ */      /* setisloginsuccess(false)  */
       router.push("/");
     }
   };

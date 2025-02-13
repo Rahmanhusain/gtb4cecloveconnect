@@ -4,6 +4,7 @@ import {
   EditIcon,
   EyeClose,
   EyeOpen,
+  Instagram,
   MiniloadIcon,
   PowerIcon,
 } from "@/icons/icon";
@@ -17,7 +18,7 @@ import { ResetUserData } from "@/lib/store/features/UserSlice";
 import WarningModal from "./WarningModal";
 
 export default function ProfileSetting() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [showPasswordSign, setShowPasswordSign] = useState(false);
@@ -32,7 +33,7 @@ export default function ProfileSetting() {
   const user = useAppSelector((state) => state.Authenticator);
   const userdata = useAppSelector((state) => state.UserData);
 
-/*   useEffect(() => {
+  useEffect(() => {
     const verifyToken = async () => {
       const res = await fetch("/api/verifytoken", {
         method: "POST",
@@ -43,7 +44,6 @@ export default function ProfileSetting() {
       const result = await res.json();
 
       if (result.status === 201) {
-       
         dispatch(
           SetUser({
             email: result.data.email,
@@ -55,7 +55,7 @@ export default function ProfileSetting() {
         setprofilephotosrc(result.data.profilephotosrc);
         setShow(true);
       } else {
-        router.push("/login"); 
+        router.push("/login");
       }
     };
     if (user.email === null) {
@@ -64,10 +64,9 @@ export default function ProfileSetting() {
       setprofilephotosrc(user.profilephotosrc);
       setShow(true);
     }
-  }, []); */
+  }, []);
 
-/*   useEffect(() => {
-   
+  useEffect(() => {
     if (userdata) {
       const initialProfile = () => {
         return {
@@ -75,12 +74,31 @@ export default function ProfileSetting() {
           Email: userdata.email,
           Password: userdata.Password,
           PhoneNumber: userdata.phoneNumber,
+          Gender: userdata.gender,
+          keywords: {
+            key1: userdata.keywords.key1,
+            key2: userdata.keywords.key2,
+            key3: userdata.keywords.key3,
+          },
+          bio: userdata.bio,
+          Instagram: {
+            Username: userdata.Instagram.Username,
+            Link: userdata.Instagram.Link,
+          },
+          Snapchat: {
+            Username: userdata.Snapchat.Username,
+            Link: userdata.Snapchat.Link,
+          },
+          Facebook: {
+            Username: userdata.Facebook.Username,
+            Link: userdata.Facebook.Link,
+          },
         };
       };
       setProfile(initialProfile());
       setEditingProfile(initialProfile());
     }
-  }, [userdata]); */
+  }, [userdata]);
 
   const updateProfile = async () => {
     const res = await fetch("/api/updateprofile", {
@@ -92,6 +110,7 @@ export default function ProfileSetting() {
         email: user.email,
         imagesrc: profilephotosrc,
         data: editingProfile,
+        password: userdata.password
       }),
     });
 
@@ -121,20 +140,66 @@ export default function ProfileSetting() {
   const [profile, setProfile] = useState({
     Profilename: "",
     Email: "",
+    Gender: "",
     Password: "",
     PhoneNumber: "",
+    keywords: {
+      key1: "",
+      key2: "",
+      key3: "",
+    },
+    bio: "",
+    Instagram: {
+      Username: "",
+      Link: "",
+    },
+    Snapchat: {
+      Username: "",
+      Link: "",
+    },
+    Facebook: {
+      Username: "",
+      Link: "",
+    },
   });
+
   const [editingProfile, setEditingProfile] = useState({
     Profilename: "",
     Email: "",
+    Gender: "",
     Password: "",
     PhoneNumber: "",
+    keywords: {
+      key1: "",
+      key2: "",
+      key3: "",
+    },
+    bio: "",
+    Instagram: {
+      Username: "",
+      Link: "",
+    },
+    Snapchat: {
+      Username: "",
+      Link: "",
+    },
+    Facebook: {
+      Username: "",
+      Link: "",
+    },
   });
+
   const [isEditing, setIsEditing] = useState({
     Profilename: false,
     Email: false,
+    Gender: false,
     Password: false,
     PhoneNumber: false,
+    keywords: false,
+    bio: false,
+    Instagram: false,
+    Snapchat: false,
+    Facebook: false,
   });
 
   const handleEdit = (field) => {
@@ -152,9 +217,20 @@ export default function ProfileSetting() {
     setIsEditing({ ...isEditing, [field]: false });
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e, platform = null) => {
     const { name, value } = e.target;
-    setEditingProfile({ ...editingProfile, [name]: value });
+
+    if (platform) {
+      setEditingProfile({
+        ...editingProfile,
+        [platform]: {
+          ...editingProfile[platform],
+          [name]: value,
+        },
+      });
+    } else {
+      setEditingProfile({ ...editingProfile, [name]: value });
+    }
   };
 
   if (!show) {
@@ -194,84 +270,533 @@ export default function ProfileSetting() {
               Edit Photo
             </p>
           </div>
-          <div>
-            <h3 className="text-xl break-words courgette">{profile.Profilename}Rahman Husain</h3>
-            <p className="text-gray-500 break-words courgette">{profile.Email}rahman@gmail.com</p>
+          <div className="w-full">
+            <h3 className="text-xl break-words courgette text-center w-full">
+              {profile.Profilename}
+            </h3>
+            <p className="text-gray-500 break-words courgette text-center w-full">
+              {profile.Email}
+            </p>
           </div>
         </div>
 
-        {Object.keys(profile).map((field) => (
-          <div key={field} className="mb-2">
-            <label className="block mb-1 text-xl capitalize">{field}</label>
-            {isEditing[field] ? (
-              <div className="flex mb-4 flex-col gap-2 md:flex-row">
-                <div className="w-full relative">
-                  <input
-                    type={
-                      field === "Password" && !showPasswordSign
-                        ? "password"
-                        : "text"
-                    }
-                    name={field}
-                    value={editingProfile[field] || ""}
-                    onChange={(e) => {
-                      if (field === "PhoneNumber") {
-                        if (
-                          !/^\d*$/.test(e.target.value) ||
-                          e.target.value.length > 10
-                        ) {
-                          return;
-                        }
-                      }
-                      handleChange(e);
-                    }}
-                    className="flex-1 p-2 w-full bg-transparent courgette text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none rounded-xl mr-2"
-                  />
-                  {field === "Password" &&
-                    (!showPasswordSign ? (
-                      <EyeClose
-                        className={`absolute right-2 top-2 cursor-pointer text-[#928b92]`}
-                        onClick={togglePasswordVisibilitySign}
-                      />
-                    ) : (
-                      <EyeOpen
-                        className={`absolute right-2 top-2 cursor-pointer text-[#928b92] `}
-                        onClick={togglePasswordVisibilitySign}
-                      />
-                    ))}
-                </div>
+        {/* inputs start for editing */}
+        <div className="mb-2">
+          <label className="block mb-1 text-xl capitalize">Name</label>
+          {isEditing["Profilename"] ? (
+            <div className="flex mb-4 flex-col gap-2 md:flex-row">
+              <input
+                type="text"
+                name="Profilename"
+                value={editingProfile["Profilename"] || ""}
+                onChange={handleChange}
+                className="flex-1 p-2 w-full courgette bg-transparent text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none rounded-xl mr-2"
+              />
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleSave("Profilename")}
+                  className="bg-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Okay
+                </button>
+                <button
+                  onClick={() => handleCancel("Profilename")}
+                  className="border border-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-gray-400 pl-2">{profile.Profilename}</span>
+              <button
+                onClick={() => handleEdit("Profilename")}
+                className="border border-[#bd145b] rounded px-4 py-2"
+              >
+                Edit
+              </button>
+            </div>
+          )}
+        </div>
 
+        <div className="mb-2">
+          <label className="block mb-1 text-xl capitalize">Gender</label>
+          {isEditing["Gender"] ? (
+            <div className="flex mb-4 flex-col gap-2 md:flex-row">
+              <select
+                name="Gender"
+                value={editingProfile["Gender"] || ""}
+                onChange={handleChange}
+                className="flex-1 p-2 w-full bg-transparent text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none rounded-xl mr-2"
+              >
+                <option className="bg-black outline-none" value="">
+                  Select Gender
+                </option>
+                <option className="bg-black outline-none" value="Male">
+                  Male
+                </option>
+                <option className="bg-black outline-none" value="Female">
+                  Female
+                </option>
+              </select>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleSave("Gender")}
+                  className="bg-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Okay
+                </button>
+                <button
+                  onClick={() => handleCancel("Gender")}
+                  className="border border-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-gray-400 pl-2">
+                {profile.Gender || "Not specified"}
+              </span>
+              <button
+                onClick={() => handleEdit("Gender")}
+                className="border border-[#bd145b] rounded px-4 py-2"
+              >
+                Edit
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="mb-2">
+          <label className="block mb-1 text-xl capitalize">Email</label>
+          {isEditing["Email"] ? (
+            <div className="flex mb-4 flex-col gap-2 md:flex-row">
+              <input
+                type="text"
+                name="Email"
+                value={editingProfile["Email"] || ""}
+                onChange={handleChange}
+                className="flex-1 p-2 w-full courgette bg-transparent text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none rounded-xl mr-2"
+              />
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleSave("Email")}
+                  className="bg-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Okay
+                </button>
+                <button
+                  onClick={() => handleCancel("Email")}
+                  className="border border-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-gray-400 pl-2">{profile.Email}</span>
+              <button
+                onClick={() => handleEdit("Email")}
+                className="border border-[#bd145b] rounded px-4 py-2"
+              >
+                Edit
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="mb-2">
+          <label className="block mb-1 text-xl capitalize">Phone Number</label>
+          {isEditing["PhoneNumber"] ? (
+            <div className="flex mb-4 flex-col gap-2 md:flex-row">
+              <input
+                type="text"
+                name="PhoneNumber"
+                value={editingProfile["PhoneNumber"] || ""}
+                onChange={(e) => {
+                  if (
+                    !/^[\d]*$/.test(e.target.value) ||
+                    e.target.value.length > 10
+                  )
+                    return;
+                  handleChange(e);
+                }}
+                className="flex-1 p-2 w-full courgette bg-transparent text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none rounded-xl mr-2"
+              />
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleSave("PhoneNumber")}
+                  className="bg-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Okay
+                </button>
+                <button
+                  onClick={() => handleCancel("PhoneNumber")}
+                  className="border border-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-gray-400 pl-2">
+                {profile.PhoneNumber || "Null"}
+              </span>
+              <button
+                onClick={() => handleEdit("PhoneNumber")}
+                className="border border-[#bd145b] rounded px-4 py-2"
+              >
+                Edit
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="mb-2">
+          <label className="block mb-1 text-xl capitalize">Password</label>
+          {isEditing["Password"] ? (
+            <div className="flex mb-4 flex-col gap-2 md:flex-row relative">
+              <div className="relative w-full">
+                <input
+                  type={!showPasswordSign ? "password" : "text"}
+                  name="Password"
+                  value={editingProfile["Password"] || ""}
+                  onChange={handleChange}
+                  className="flex-1 p-2 w-full courgette bg-transparent text-sm border-2 border-[#717071bf] placeholder-gray-400 outline-none rounded-xl mr-2"
+                />
+                <span
+                  className="absolute right-2 top-2 cursor-pointer text-[#928b92]"
+                  onClick={togglePasswordVisibilitySign}
+                >
+                  {showPasswordSign ? <EyeOpen /> : <EyeClose />}
+                </span>
+              </div>
+
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleSave("Password")}
+                  className="bg-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Okay
+                </button>
+                <button
+                  onClick={() => handleCancel("Password")}
+                  className="border border-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center mb-4 relative">
+              <span className="text-gray-400 pl-2">********</span>
+              <button
+                onClick={() => handleEdit("Password")}
+                className="border border-[#bd145b] rounded px-4 py-2"
+              >
+                Edit
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* keywords start*/}
+          <h1 className="text-2xl font-bold text-[#bd145b] mt-8 mb-4">
+            Keywords
+          </h1>
+
+          <div className="mb-2">
+            {isEditing["keywords"] ? (
+              <div className="flex mb-4 flex-col gap-2 md:flex-row">
+                <input
+            type="text"
+            name="key1"
+            placeholder="Enter keyword 1"
+            value={editingProfile.keywords.key1 || ""}
+            onChange={(e) => handleChange(e, "keywords")}
+            className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+                />
+                <input
+            type="text"
+            name="key2"
+            placeholder="Enter keyword 2"
+            value={editingProfile.keywords.key2 || ""}
+            onChange={(e) => handleChange(e, "keywords")}
+            className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+                />
+                <input
+            type="text"
+            name="key3"
+            placeholder="Enter keyword 3"
+            value={editingProfile.keywords.key3 || ""}
+            onChange={(e) => handleChange(e, "keywords")}
+            className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+                />
                 <div className="flex space-x-2">
-                  <button
-                    onClick={() => handleSave(field)}
-                    className=" bg-[#bd145b] rounded-xl px-4 py-2"
-                  >
-                    Okay
-                  </button>
-                  <button
-                    onClick={() => handleCancel(field)}
-                    className="border border-[#bd145b] rounded-xl px-4 py-2"
-                  >
-                    Cancel
-                  </button>
+            <button
+              onClick={() => handleSave("keywords")}
+              className="bg-[#bd145b] rounded-lg px-4 py-2"
+            >
+              Save
+            </button>
+            <button
+              onClick={() => handleCancel("keywords")}
+              className="border border-[#bd145b] rounded-lg px-4 py-2"
+            >
+              Cancel
+            </button>
                 </div>
               </div>
             ) : (
-              <div className="flex justify-between items-center mb-4 ">
-                <span className="text-gray-400 pl-2">
-                  {field === "Password" ? "********" : profile[field]}
-                </span>
+              <div className="flex justify-between items-center mb-4">
+                <div className="flex flex-col courgette">
+            <span className="text-gray-400 text-sm leading-3">
+              {[profile.keywords.key1, profile.keywords.key2, profile.keywords.key3].filter(Boolean).join(", ") || "Keywords Not set"}
+            </span>
+                </div>
                 <button
-                  onClick={() => handleEdit(field)}
-                  className="border border-[#bd145b] rounded px-4 py-2"
+            onClick={() => handleEdit("keywords")}
+            className="border border-[#bd145b] rounded px-4 py-2"
                 >
-                  Edit
+            Edit
                 </button>
               </div>
             )}
           </div>
-  
-        ))}
+
+          {/* bio start*/}
+
+        <h1 className="text-2xl font-bold text-[#bd145b] mt-8 mb-4">Bio</h1>
+
+        <div className="mb-2">
+          {isEditing["bio"] ? (
+            <div className="flex mb-4 flex-col gap-2 md:flex-row">
+              <textarea
+                type="text"
+                name="bio"
+                placeholder="Enter your bio in 250 characters"
+                value={editingProfile["bio"] || ""}
+                onChange={(e) => {
+                  if (e.target.value.length > 250) return;
+                  handleChange(e);
+                }}
+                className="flex-1 p-2 courgette bg-transparent h-52 text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+              />
+
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleSave("bio")}
+                  className="bg-[#bd145b] rounded-lg px-4 py-2 h-fit"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => handleCancel("bio")}
+                  className="border border-[#bd145b] rounded-lg px-4 py-2 h-fit"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center mb-4">
+              <div className="flex flex-col courgette">
+                <span className="text-gray-400 text-sm leading-3">
+                  {profile.bio || "Bio not set"}
+                </span>
+              </div>
+              <button
+                onClick={() => handleEdit("bio")}
+                className="border border-[#bd145b] rounded px-4 py-2"
+              >
+                Edit
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* bio end*/}
+
+        {/* keywords end*/}
+
+        <h1 className="text-2xl font-bold text-[#bd145b] mt-8 mb-4">
+          Social Links
+        </h1>
+        {/* Instagram Edit */}
+        <div className="mb-2">
+          <label className="block mb-1 text-xl capitalize">Instagram</label>
+          {isEditing["Instagram"] ? (
+            <div className="flex mb-4 flex-col gap-2 md:flex-row">
+              <input
+                type="text"
+                name="Username"
+                placeholder="Username"
+                value={editingProfile.Instagram.Username || ""}
+                onChange={(e) => handleChange(e, "Instagram")}
+                className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+              />
+              <input
+                type="text"
+                name="Link"
+                placeholder="Profile Link"
+                value={editingProfile.Instagram.Link || ""}
+                onChange={(e) => handleChange(e, "Instagram")}
+                className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+              />
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleSave("Instagram")}
+                  className="bg-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => handleCancel("Instagram")}
+                  className="border border-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center mb-4">
+              <div className="flex flex-col courgette">
+                <span className="text-gray-400 text-sm leading-3">
+                  {profile.Instagram.Username || "Not set"}
+                </span>
+                <span className="text-gray-500 text-xs">
+                  {profile.Instagram.Link || "Not set"}
+                </span>
+              </div>
+              <button
+                onClick={() => handleEdit("Instagram")}
+                className="border border-[#bd145b] rounded px-4 py-2"
+              >
+                Edit
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Snapchat Edit */}
+        <div className="mb-2">
+          <label className="block mb-1 text-xl capitalize">Snapchat</label>
+          {isEditing["Snapchat"] ? (
+            <div className="flex mb-4 flex-col gap-2 md:flex-row">
+              <input
+                type="text"
+                name="Username"
+                placeholder="Username"
+                value={editingProfile.Snapchat.Username || ""}
+                onChange={(e) => handleChange(e, "Snapchat")}
+                className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+              />
+              <input
+                type="text"
+                name="Link"
+                placeholder="Profile Link"
+                value={editingProfile.Snapchat.Link || ""}
+                onChange={(e) => handleChange(e, "Snapchat")}
+                className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+              />
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleSave("Snapchat")}
+                  className="bg-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => handleCancel("Snapchat")}
+                  className="border border-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center mb-4">
+              <div className="flex flex-col courgette">
+                <span className="text-gray-400 text-sm leading-3">
+                  {profile.Snapchat.Username || "Not set"}
+                </span>
+                <span className="text-gray-500 text-xs">
+                  {profile.Snapchat.Link || "Not set"}
+                </span>
+              </div>
+              <button
+                onClick={() => handleEdit("Snapchat")}
+                className="border border-[#bd145b] rounded px-4 py-2"
+              >
+                Edit
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Facebook Edit */}
+        <div className="mb-2">
+          <label className="block mb-1 text-xl capitalize">Facebook</label>
+          {isEditing["Facebook"] ? (
+            <div className="flex mb-4 flex-col gap-2 md:flex-row">
+              <input
+                type="text"
+                name="Username"
+                placeholder="Username"
+                value={editingProfile.Facebook.Username || ""}
+                onChange={(e) => handleChange(e, "Facebook")}
+                className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+              />
+              <input
+                type="text"
+                name="Link"
+                placeholder="Profile Link"
+                value={editingProfile.Facebook.Link || ""}
+                onChange={(e) => handleChange(e, "Facebook")}
+                className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+              />
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleSave("Facebook")}
+                  className="bg-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => handleCancel("Facebook")}
+                  className="border border-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center mb-4">
+              <div className="flex flex-col courgette">
+                <span className="text-gray-400 text-sm leading-3">
+                  {profile.Facebook.Username || "Not set"}
+                </span>
+                <span className="text-gray-500 text-xs">
+                  {profile.Facebook.Link || "Not set"}
+                </span>
+              </div>
+              <button
+                onClick={() => handleEdit("Facebook")}
+                className="border border-[#bd145b] rounded px-4 py-2"
+              >
+                Edit
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* inputs end for editing */}
+
         <div className="flex justify-between mt-7">
           <button
             className="flex items-center px-5 gap-1 py-2   text-white border border-[#ff006aa7] rounded-lg"
@@ -302,7 +827,9 @@ export default function ProfileSetting() {
             <button
               disabled={!canSave}
               className={`flex items-center px-5 gap-1 py-2 ${
-                canSave ? "bg-[#ff006aa7] hover:bg-[#ff006ac3] cursor-pointer" : "bg-[#f71b772f] cursor-not-allowed"
+                canSave
+                  ? "bg-[#ff006aa7] hover:bg-[#ff006ac3] cursor-pointer"
+                  : "bg-[#f71b772f] cursor-not-allowed"
               } rounded-lg`}
               onClick={async () => {
                 setisSaving(true);
@@ -322,9 +849,28 @@ export default function ProfileSetting() {
                   setProfile(() => {
                     return {
                       Profilename: userdata.Profilename,
-                      email: userdata.email,
+                      Email: userdata.email,
                       Password: userdata.Password,
-                      phoneNumber: userdata.phoneNumber,
+                      PhoneNumber: userdata.phoneNumber,
+                      Gender: userdata.gender,
+                      keywords: {
+                        key1: userdata.keywords.key1,
+                        key2: userdata.keywords.key2,
+                        key3: userdata.keywords.key3,
+                      },
+                      bio: userdata.bio,
+                      Instagram: {
+                        Username: userdata.Instagram.Username,
+                        Link: userdata.Instagram.Link,
+                      },
+                      Snapchat: {
+                        Username: userdata.Snapchat.Username,
+                        Link: userdata.Snapchat.Link,
+                      },
+                      Facebook: {
+                        Username: userdata.Facebook.Username,
+                        Link: userdata.Facebook.Link,
+                      },
                     };
                   });
                   setCansave(false);

@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const CounterSchema = new mongoose.Schema({
   sequenceName: {
-    type: Number,
+    type: String,
     required: true,
     unique: true,
   },
@@ -12,7 +12,8 @@ const CounterSchema = new mongoose.Schema({
   },
 });
 
-const Counter = mongoose.models.Counter || mongoose.model("Counter", CounterSchema);
+const Counter =
+  mongoose.models.Counter || mongoose.model("Counter", CounterSchema);
 
 const UserSchema = new mongoose.Schema({
   userid: {
@@ -42,33 +43,78 @@ const UserSchema = new mongoose.Schema({
   phoneNumber: {
     type: String,
   },
+  enrollmentno: {
+    type: String,
+  },
+
   matchrequest: {
     type: [Number],
     default: [],
   },
   matched: {
-    type: Array,
+    type: [Number],
     default: [],
   },
   matchnotification: {
     type: Boolean,
     default: false,
   },
-  socials: {
-    type: Array,
-    default: [],
-  },
   profilephotosrc: {
     type: String,
-    default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s",
+    default:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s",
   },
   keywords: {
-    type: Array,
-    default: [],
+    key1: {
+      type: String,
+      default: "",
+    },
+    key2: {
+      type: String,
+      default: "",
+    },
+    key3: {
+      type: String,
+      default: "",
+    },
   },
   bio: {
     type: String,
     default: "",
+  },
+  notififlastindex: {
+    type: Number,
+    default: 0,
+  },
+  Instagram: {
+    Username: {
+      type: String,
+      default: "",
+    },
+    Link: {
+      type: String,
+      default: "",
+    },
+  },
+  Snapchat: {
+    Username: {
+      type: String,
+      default: "",
+    },
+    Link: {
+      type: String,
+      default: "",
+    },
+  },
+  Facebook: {
+    Username: {
+      type: String,
+      default: "",
+    },
+    Link: {
+      type: String,
+      default: "",
+    },
   },
   createdAt: {
     type: Date,
@@ -89,12 +135,18 @@ UserSchema.pre("save", async function (next) {
   if (!this.userid) {
     try {
       const counter = await Counter.findOneAndUpdate(
-        { sequenceName: "userId" },
+        { sequenceName: "userId" }, // Ensure this is a string
         { $inc: { sequenceValue: 1 } },
         { new: true, upsert: true }
       );
 
-      this.userid = counter.sequenceValue;
+      // Check if counter was updated successfully
+      if (counter && counter.sequenceValue) {
+        this.userid = counter.sequenceValue;
+      } else {
+        throw new Error("Failed to generate userId.");
+      }
+
       next();
     } catch (error) {
       next(error);
