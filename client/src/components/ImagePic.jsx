@@ -1,5 +1,5 @@
 "use client";
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Heart, HeartBroken } from "@/icons/icon";
 import { useRouter } from "next/navigation";
@@ -15,6 +15,7 @@ export default function ImagePic() {
   const [index, setindex] = React.useState(0);
   const [matches, setMatches] = useState([]);
 
+ useEffect(() => {
     const verifyToken = async () => {
       const res = await fetch("/api/verifytoken", {
         method: "POST",
@@ -34,49 +35,47 @@ export default function ImagePic() {
         );
         dispatch(SetUserData(result.data));
       } else {
-        router.push("/login");
+        router.push("/");
       }
     };
-    /* if (user.email === null) {
+    if (user.email === null) {
       verifyToken();
     } else {
-      setprofilephotosrc(user.profilephotosrc);
-      setShow(true);
-    } */
+    }
+  }, []);
 
-      useEffect(() => {
-        const retireveuser = async () => {
-          if (!userdata || !userdata.email) return; // Prevent API call with null data
-      
-          const res = await fetch("/api/getusers", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: userdata.email,
-              password: userdata.password,
-            }),
-          });
-      
-          const result = await res.json();
-          setMatches(result.data);
-        };
-      
-        retireveuser();
-      }, [userdata]); // Run when userdata updates
-      
+  useEffect(() => {
+    const retireveuser = async () => {
+      if (!userdata || !userdata.email) return; // Prevent API call with null data
+   
+      const res = await fetch("/api/getusers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userdata.email,
+          password: userdata.password,
+        }),
+      });
+
+      const result = await res.json();
+      setMatches(result.data);
+    };
+
+    retireveuser();
+  }, [userdata]); // Run when userdata updates
 
   const fadeout = () => {
     const girlImage = document.querySelector(".girlImage");
-   
+
     girlImage.classList.add("scale-90");
     girlImage.classList.add("opacity-0");
 
     setTimeout(() => {
       if (index === matches.length - 1) {
         setindex(0);
-      }else{
+      } else {
         setindex(index + 1);
       }
       girlImage.classList.remove("scale-90");
@@ -86,6 +85,15 @@ export default function ImagePic() {
 
   return (
     <div className="px-6">
+      <div
+        id="hearts-alpaca"
+        className="hearts fixed bottom-0 left-0 opacity-50 sm:opacity-100"
+      >
+        <div className="heart"></div>
+        <div className="heart"></div>
+        <div className="heart"></div>
+        <div className="heart"></div>
+      </div>
       <div className="flex flex-row py-10 justify-evenly min-h-[100dvh] ">
         <div
           id="heartbreakIcon"
@@ -122,42 +130,50 @@ export default function ImagePic() {
                 <Heart className="w-8 h-8 text-[#E1306C]" />
               </div>
             </div>
-            <h2 className="cookie text-4xl mt-4 italic">{matches[index]?.Profilename || "Lisa"}</h2>
+            <h2 className="cookie text-4xl mt-4 italic">
+              {matches[index]?.Profilename || "Lisa"}
+            </h2>
             <div className="flex flex-row items-center flex-wrap justify-start gap-2 courgette mt-2">
-              <h3 className="bg-[#FF006Aa7] text-xs  py-1.5 px-4 rounded-full tracking-widest">
-                {matches[index]?.keywords.key1 || "something"}
-              </h3>
-              <h3 className="bg-[#FF006Aa7] text-xs  py-1.5 px-4 rounded-full tracking-widest">
-              {matches[index]?.keywords.key2 || "something"}
-              </h3>
-              <h3 className="bg-[#FF006Aa7] text-xs  py-1.5 px-4 rounded-full tracking-widest">
-              {matches[index]?.keywords.key3 || "something"}
-              </h3>
+              {matches[index]?.keywords.key1 && (
+                <h3 className="bg-[#FF006Aa7] text-xs  py-1.5 px-4 rounded-full tracking-widest">
+                  {matches[index]?.keywords.key1}
+                </h3>
+              )}
+              {matches[index]?.keywords.key2 && (
+                <h3 className="bg-[#FF006Aa7] text-xs  py-1.5 px-4 rounded-full tracking-widest">
+                  {matches[index]?.keywords.key2}
+                </h3>
+              )}
+              {matches[index]?.keywords.key3 && (
+                <h3 className="bg-[#FF006Aa7] text-xs  py-1.5 px-4 rounded-full tracking-widest">
+                  {matches[index]?.keywords.key3}
+                </h3>
+              )}
             </div>
           </div>
           <h2 className="cookie text-4xl mt-8 mb-2 italic">Bio</h2>
           <p className="courgette w-full  text-xs text-gray-300 tracking-wider">
-            {matches[index]?.bio || "something"}
+            {matches[index]?.bio}
           </p>
         </div>
 
         <div
           id="heartIcon"
-          className="heartbreak hidden sm:flex  fixed top-1/2 md:right-[20%] right-[10%] bg-[#FF006A40] rounded-full p-4"
+          className="heartbreak hidden sm:flex  fixed top-1/2 md:right-[20%] right-[10%] bg-[#FF006A40] rounded-full cursor-pointer p-4"
           onClick={fadeout}
         >
           <Heart className="w-12 h-12 text-[#E1306C]" />
         </div>
       </div>
-      <div
+      {/* <div
         id="hearts-alpaca"
-        className="hearts -z-10 fixed bottom-0 left-0 opacity-50 sm:opacity-100"
+        className="hearts fixed bottom-0 left-0 opacity-50 sm:opacity-100"
       >
         <div className="heart"></div>
         <div className="heart"></div>
         <div className="heart"></div>
         <div className="heart"></div>
-      </div>
+      </div> */}
     </div>
   );
 }
