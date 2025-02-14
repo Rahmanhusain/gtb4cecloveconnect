@@ -105,7 +105,7 @@ export default function ImagePic() {
   };
 
   return (
-    <div className="px-6">
+    <div className="px-6">  
       <div
         id="hearts-alpaca"
         className="hearts fixed bottom-0 left-0 opacity-50 sm:opacity-100"
