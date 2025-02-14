@@ -66,6 +66,23 @@ export default function ImagePic() {
     retireveuser();
   }, [userdata]); // Run when userdata updates
 
+  const requestMatch = async (userid1, userid2) => {
+    const res = await fetch("/api/match", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userdata.email,
+        password: userdata.password,
+        userid1,
+        userid2,
+      }),
+    });
+    const result = await res.json();
+    console.log(result);
+  };
+
   const fadeout = () => {
     const girlImage = document.querySelector(".girlImage");
 
@@ -160,7 +177,10 @@ export default function ImagePic() {
         <div
           id="heartIcon"
           className="heartbreak hidden sm:flex  fixed top-1/2 md:right-[20%] right-[10%] bg-[#FF006A40] rounded-full cursor-pointer p-4"
-          onClick={fadeout}
+          onClick={()=>{
+            requestMatch(userdata.userid, matches[index].userid)
+            fadeout()
+          }}
         >
           <Heart className="w-12 h-12 text-[#E1306C]" />
         </div>

@@ -5,11 +5,12 @@ export default function Home() {
   return (
     <div>
 
-      <div className="flex sm:flex md:flex-row flex-col-reverse sm:px-32 px-10 items-center justify-between h-full sm:py-24 py-10">
-        <div className="md:w-1/2 w-full h-full text-center md:text-left">
+      <div className="flex sm:flex md:flex-row flex-col-reverse sm:px-32 px-10 items-center justify-between min-h-[calc(100dvh-4.6rem)] sm:py-24 py-10">
+        <div className="md:w-1/2 w-full h-full text-left">
           <h1 className="sm:text-6xl text-5xl cookie my-6">Find You Date</h1>
           <p className="courgette my-2 mb-6 sm:text-sm text-xs w-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus officiis inventore eaque repudiandae obcaecati itaque molestias dolore iusto blanditiis molestiae cum nisi laudantium fugit, eveniet asperiores minus cumque expedita sint! Quos, atque animi. Rerum, sapiente quia debitis, ipsa nam dolores quisquam aperiam odit alias et, recusandae nemo incidunt exercitationem enim!</p>
-          <Link href="/" className="rounded-lg border-2 border-[#ff006a] p-2 px-6 cookie text-xl">Sign Up</Link>
+          <Link href="/match" className="rounded-lg border-2 border-[#ff006a] p-2 px-6 cookie text-xl courgette">find your Date</Link>
+          <Link href="/register" className="rounded-lg border-2 border-[#ff006a] p-2 px-6 cookie text-xl ml-3 courgette">Sign Up</Link>
         </div>
         <div className="md:w-[400px] sm:w-[300px] w-[300px] h-auto flex items-center justify-center">
           <Image src="/image.png" alt="couple heart image" width={500} height={500} className="w-full"/>
