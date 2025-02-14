@@ -10,6 +10,9 @@ export default function page() {
 
         <div className="mainImg m-auto h-full  max-w-96 flex flex-col items-start justify-center girlImage  transition-all duration-500 ease-in-out">
             <div className="mx-auto">
+                <h1 className="cookie text-4xl mt-4 italic">
+                    Lisa's Profile
+                </h1>
                 <div className="rounded-2xl h-[55vh] w-auto aspect-[39/49] relative">
                     <Image
                         id="girlImg"
@@ -65,9 +68,9 @@ export default function page() {
             <Link href='/' className='flex flex-row items-center justify-center w-full gap-4 p-4 bg-[#085C05] rounded-full my-5'> <WhatsAppIcon className="w-8 h-8 text-[#fff]" />
              Chat on Whatsapp
              </Link>
-
-             <Loading />
-        </div>
+            
+             {/* <Loading /> */}
+        </div>  
         
     )
 }

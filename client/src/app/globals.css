@@ -82,6 +82,8 @@ body {
       transform: scale(1);
     }
   }
+
+  
  @keyframes floating-heart {
    0% {
      opacity: 0;
