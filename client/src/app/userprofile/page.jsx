@@ -69,7 +69,7 @@ export default function page() {
              Chat on Whatsapp
              </Link>
             
-             {/* <Loading /> */}
+             <Loading />
         </div>  
         
     )

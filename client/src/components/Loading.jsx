@@ -3,8 +3,12 @@ import React from 'react'
 
 export default function Loading() {
   return (
-    <div className='flex items-center justify-center w-screen h-screen z-40 bg-black fixed top-0 left-0'>
+    <div className='flex flex-col items-center justify-center w-screen h-screen z-40 bg-black fixed top-0 left-0'>
       <Heart className=" h-12 w-12 text-red-500 heartbeat" />
+      <p className='text-center mt-2 flex items-center  gap-2'>
+      <span className="dot dot1"><Heart className='w-2 h-2 text-red-500'/></span><span className="dot dot2"><Heart className='w-2 h-2 text-red-500'/></span><span className="dot dot3"><Heart className='w-2 h-2 text-red-500'/></span>
+  
+      </p>
     </div>
   )
 }
