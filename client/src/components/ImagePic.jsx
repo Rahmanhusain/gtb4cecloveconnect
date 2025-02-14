@@ -44,6 +44,8 @@ export default function ImagePic() {
     }
   }, []);
 
+
+
   useEffect(() => {
     const retireveuser = async () => {
       if (!userdata || !userdata.email) return; // Prevent API call with null data
@@ -64,7 +66,9 @@ export default function ImagePic() {
     };
 
     retireveuser();
-  }, [userdata]); // Run when userdata updates
+  }, []); // Run when userdata updates
+
+
 
   const requestMatch = async (userid1, userid2) => {
     const res = await fetch("/api/match", {

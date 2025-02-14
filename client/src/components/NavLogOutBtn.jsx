@@ -47,7 +47,7 @@ function NavLogOutBtn() {
     }else{
       console.log("user.email is not null")
     }
-  }, [pathname, searchParams, user.email, dispatch]); // Re-run when pathname or searchParams change
+  }, [pathname, searchParams, user.email, dispatch,userdata]); // Re-run when pathname or searchParams change
 
   return (
     <div className="w-auto h-full">
