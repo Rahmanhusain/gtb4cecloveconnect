@@ -166,3 +166,105 @@ body {
   border-radius: 10px; /* Rounded thumb */
   background: #615d5e75; /* Track color */
 }
+
+
+.msgtip::before{
+  content: "";
+  display: block;
+  margin: auto;
+  aspect-ratio: 1/1;
+  width: 25px; 
+  rotate: 45deg;
+  top: -20%;
+  z-index: -10;
+  position: absolute;
+  background: #ff006a;
+  border-radius: 4px;
+}
+
+.backlight{
+  filter: drop-shadow(0 0 70px #ff006a);
+}
+
+.heart-icon {
+  position: absolute;
+  color: #ff006aa4;
+  z-index: -10;
+  animation: floatAnimation 6s infinite ease-in-out alternate;
+}
+
+.heart-1 {
+  top: 12rem;
+  left: 6rem;
+  width: 12rem;
+  transform: rotate(-45deg);
+  animation-duration: 5s;
+}
+
+.heart-2 {
+  top: 16rem;
+  right: 5rem;
+  width: 16rem;
+  transform: rotate(45deg);
+  animation-duration: 7s;
+}
+
+.heart-3 {
+  bottom: 6rem;
+  left: 25%;
+  width: 12rem;
+  transform: rotate(30deg);
+  animation-duration: 6s;
+}
+
+.heart-4 {
+  bottom: 3rem;
+  right: 33%;
+  width: 5rem;
+  transform: rotate(60deg);
+  animation-duration: 4.5s;
+}
+
+.heart-5 {
+  top: 3rem;
+  left: 33%;
+  width: 5rem;
+  transform: rotate(-45deg);
+  animation-duration: 5.5s;
+}
+
+.heart-6 {
+  bottom: 50%;
+  right: 33%;
+  width: 5rem;
+  transform: rotate(-45deg);
+  animation-duration: 6.5s;
+}
+
+.heart-7 {
+  bottom: 33%;
+  right: 50%;
+  width: 5rem;
+  transform: rotate(50deg);
+  animation-duration: 5.8s;
+}
+
+.heart-8 {
+  top: 6rem;
+  left: 50%;
+  width: 12rem;
+  transform: rotate(-45deg);
+  animation-duration: 6.2s;
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0) rotate(var(--initial-rotate, -20deg));
+  }
+  50% {
+    transform: translateY(-15px) translateX(10px) rotate(var(--initial-rotate, 30deg));
+  }
+  100% {
+    transform: translateY(10px) translateX(-10px) rotate(var(--initial-rotate, 40deg));
+  }
+}
