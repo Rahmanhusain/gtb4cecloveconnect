@@ -14,6 +14,7 @@ function NavLogOutBtn() {
   const pathname = usePathname(); // Get the current pathname
   const searchParams = useSearchParams(); // Get the current search params
   const user = useAppSelector((state) => state.Authenticator);
+  const userdata=useAppSelector((state)=>state.UserData)
   const [isjwtverifying, setisjwtverifying] = useState(true);
   const [openNotification, setopenNotification] = useState(false);
 
@@ -72,7 +73,7 @@ function NavLogOutBtn() {
             className="flex items-center w-fit h-full gap-2 py-2 justify-center relative"
           >
             <HeartStrokedIcon className="w-11 h-11 text-white" />
-            <span className="absolute w-3 h-3 bg-red-700 rounded-full ring-2 ring-black top-4 right-0"></span>
+            {userdata.notififlastindex < userdata.matched.length && <span className="absolute w-3 h-3 bg-red-700 rounded-full ring-2 ring-black top-4 right-0"></span>}
           </button>
           <Link
             href="/profile"
@@ -91,7 +92,7 @@ function NavLogOutBtn() {
       )}
 
       {
-        openNotification && <Notification setopenNotification={setopenNotification} />
+        openNotification && <Notification email={userdata.email} password={userdata.password} userid={userdata.userid} matched={userdata.matched} setopenNotification={setopenNotification} />
       }
     </div>
   );

@@ -32,6 +32,27 @@ export async function POST(request) {
 }
 
 
-export async function GET() {
-    return NextResponse.json({ message: "Hello, world!" }, { status: 200 });
+export async function PUT(request) {
+  try {
+    await connectDB();
+    const { email, password, matched } = await request.json();
+    const user = await User.findOne({ email });
+    if (user && user.password === password) {
+      const users = await User.find({ userid: { $in: matched } });
+      if (!users) {
+        return NextResponse.json({ error: "Users not found" }, { status: 404 });
+      }
+
+      return NextResponse.json({
+        data: users.reverse(),
+        message: "Users fetched successfully",
+        status: 200,
+      });
+    } else {
+      return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
+    }
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 }
