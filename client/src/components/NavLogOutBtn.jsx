@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { SetUser } from "@/lib/store/features/AuthSlice";
 import { usePathname, useSearchParams } from "next/navigation";
 import { SetUserData } from "@/lib/store/features/UserSlice";
+import { setHasNotif } from "@/lib/store/features/NotifDotSlice";
 import Image from "next/image";
 import { HeartStrokedIcon, LoaderIcon2 } from "@/icons/icon";
 import Notification from "./Notification";
@@ -14,7 +15,8 @@ function NavLogOutBtn() {
   const pathname = usePathname(); // Get the current pathname
   const searchParams = useSearchParams(); // Get the current search params
   const user = useAppSelector((state) => state.Authenticator);
-  const userdata=useAppSelector((state)=>state.UserData)
+  const userdata = useAppSelector((state) => state.UserData);
+  const newnotif = useAppSelector((state) => state.NotifData);
   const [isjwtverifying, setisjwtverifying] = useState(true);
   const [openNotification, setopenNotification] = useState(false);
 
@@ -38,16 +40,21 @@ function NavLogOutBtn() {
             profilephotosrc: result.data.profilephotosrc,
           })
         );
+        if (result.data.matched.length > result.data.notififlastindex) {
+          dispatch(setHasNotif(true));
+        }
+        /*         console.log(result.data.matched.length > result.data.notififlastindex)
+         */
         dispatch(SetUserData(result.data));
       }
     };
 
     if (!user.email) {
       verifyToken();
-    }else{
-      console.log("user.email is not null")
+    } else {
+      console.log("user.email is not null");
     }
-  }, [pathname, searchParams, user.email, dispatch,userdata]); // Re-run when pathname or searchParams change
+  }, [pathname, searchParams, user.email, dispatch, userdata]); // Re-run when pathname or searchParams change
 
   return (
     <div className="w-auto h-full">
@@ -69,11 +76,16 @@ function NavLogOutBtn() {
       ) : (
         <div className="flex flex-row items-center justify-evenly text-lg gap-6 w-fit cookie h-full">
           <button
-          onClick={()=>setopenNotification(true)}
+            onClick={() => {
+              setopenNotification(true);
+              dispatch(setHasNotif(false)); 
+            }}
             className="flex items-center w-fit h-full gap-2 py-2 justify-center relative"
           >
             <HeartStrokedIcon className="w-11 h-11 text-white" />
-            {userdata.notififlastindex < userdata.matched.length && <span className="absolute w-3 h-3 bg-red-700 rounded-full ring-2 ring-black top-4 right-0"></span>}
+            {newnotif.hasNotif && (
+              <span className="absolute w-3 h-3 bg-red-700 rounded-full ring-2 ring-black top-4 right-0"></span>
+            )}
           </button>
           <Link
             href="/profile"
@@ -91,9 +103,15 @@ function NavLogOutBtn() {
         </div>
       )}
 
-      {
-        openNotification && <Notification email={userdata.email} password={userdata.password} userid={userdata.userid} matched={userdata.matched} setopenNotification={setopenNotification} />
-      }
+      {openNotification && (
+        <Notification
+          email={userdata.email}
+          password={userdata.password}
+          userid={userdata.userid}
+          matched={userdata.matched}
+          setopenNotification={setopenNotification}
+        />
+      )}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { SetUser } from "@/lib/store/features/AuthSlice";
 import { SetUserData } from "@/lib/store/features/UserSlice";
+import { setHasNotif } from "@/lib/store/features/NotifDotSlice";
 
 export default function ImagePic() {
   const router = useRouter();
@@ -66,7 +67,7 @@ export default function ImagePic() {
     };
 
     retireveuser();
-  }, []); // Run when userdata updates
+  }, [userdata]); // Run when userdata updates
 
 
 
@@ -84,7 +85,9 @@ export default function ImagePic() {
       }),
     });
     const result = await res.json();
-    console.log(result);
+    if(result.matched){
+      dispatch(setHasNotif(true))
+    }
   };
 
   const fadeout = () => {
