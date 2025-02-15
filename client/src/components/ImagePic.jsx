@@ -9,6 +9,7 @@ import { SetUserData } from "@/lib/store/features/UserSlice";
 import { setHasNotif } from "@/lib/store/features/NotifDotSlice";
 import { set } from "mongoose";
 import Loading from "./Loading";
+import Bganim from "./Bganim";
 
 export default function ImagePic() {
   const router = useRouter();
@@ -66,6 +67,7 @@ export default function ImagePic() {
 
       const result = await res.json();
       setMatches(result.data);
+      setshow(true);
     };
 
     retireveuser();
@@ -113,6 +115,7 @@ export default function ImagePic() {
 
   return (
     <div className="px-6">
+      <Bganim opacity="opacity-50" />
       <div
         id="hearts-alpaca"
         className="hearts fixed bottom-0 left-0 opacity-50 sm:opacity-100"
