@@ -32,8 +32,8 @@ function NavLogOutBtn() {
 
       setisjwtverifying(false);
       if (result.status === 201) {
-        console.log(result.data, "verifytoken run");
-        dispatch(
+/*         console.log(result.data, "verifytoken run");
+ */        dispatch(
           SetUser({
             email: result.data.email,
             name: result.data.Profilename,
@@ -82,7 +82,7 @@ function NavLogOutBtn() {
             }}
             className="flex items-center w-fit h-full gap-2 py-2 justify-center relative"
           >
-            <HeartStrokedIcon className="w-11 h-11 text-white" />
+            <HeartStrokedIcon className="w-10 h-10 text-white" />
             {newnotif.hasNotif && (
               <span className="absolute w-3 h-3 bg-red-700 rounded-full ring-2 ring-black top-4 right-0"></span>
             )}

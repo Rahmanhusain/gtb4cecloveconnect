@@ -16,6 +16,7 @@ import { SetUser } from "@/lib/store/features/AuthSlice";
 import { SetUserData } from "@/lib/store/features/UserSlice";
 import { ResetUserData } from "@/lib/store/features/UserSlice";
 import WarningModal from "./WarningModal";
+import Loading from "./Loading";
 
 export default function ProfileSetting() {
   const [show, setShow] = useState(false);
@@ -234,13 +235,7 @@ export default function ProfileSetting() {
   };
 
   if (!show) {
-    return (
-      <div className="fixed top-0 bottom-0 left-0 right-0 bg-white flex flex-row gap-2 justify-center items-center py-4">
-        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce"></div>
-        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]"></div>
-        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]"></div>
-      </div>
-    ); // Optionally return null to prevent flickering during verification
+    return <Loading /> // Optionally return null to prevent flickering during verification
   }
 
   return (
@@ -410,7 +405,7 @@ export default function ProfileSetting() {
         </div>
 
         <div className="mb-2">
-          <label className="block mb-1 text-xl capitalize">Phone Number</label>
+          <label className="block mb-1 text-xl capitalize">Phone Number <span className="text-sm text-red-500">{"(optional)"}</span></label>
           {isEditing["PhoneNumber"] ? (
             <div className="flex mb-4 flex-col gap-2 md:flex-row">
               <input
@@ -443,7 +438,7 @@ export default function ProfileSetting() {
               </div>
             </div>
           ) : (
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center">
               <span className="text-gray-400 pl-2">
                 {profile.PhoneNumber || "Null"}
               </span>
@@ -455,6 +450,7 @@ export default function ProfileSetting() {
               </button>
             </div>
           )}
+          <p className="text-xs courgette mb-4"><span className="text-red-500">Note: </span>Phone number allows your matches to chat you on Whatsapp</p>
         </div>
 
         <div className="mb-2">
@@ -685,7 +681,7 @@ export default function ProfileSetting() {
 
         {/* Snapchat Edit */}
         <div className="mb-2">
-          <label className="block mb-1 text-xl capitalize">Snapchat</label>
+          <label className="block mb-1 text-xl capitalize">Snapchat <span className="text-sm text-red-500">{"(optional)"}</span></label>
           {isEditing["Snapchat"] ? (
             <div className="flex mb-4 flex-col gap-2 md:flex-row">
               <input
@@ -741,7 +737,7 @@ export default function ProfileSetting() {
 
         {/* Facebook Edit */}
         <div className="mb-2">
-          <label className="block mb-1 text-xl capitalize">Facebook</label>
+          <label className="block mb-1 text-xl capitalize">Facebook <span className="text-sm text-red-500">{"(optional)"}</span></label>
           {isEditing["Facebook"] ? (
             <div className="flex mb-4 flex-col gap-2 md:flex-row">
               <input

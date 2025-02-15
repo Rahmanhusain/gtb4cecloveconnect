@@ -153,13 +153,14 @@ body {
    animation-delay: 4.5s;
  }
 
- .custom-scrollbar::-webkit-scrollbar-track {
+
+.custom-scrollbar::-webkit-scrollbar-track {
   border-radius: 10px; /* Rounded track */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 10px; /* Rounded thumb */
-  background: #f81d66a8; /* Track color */
+  background: #615d5e00; /* Track color */
   transition: background 0.5s ease-in-out;
 }
 .custom-scrollbar:hover::-webkit-scrollbar-thumb{
