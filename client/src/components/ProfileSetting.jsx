@@ -17,6 +17,7 @@ import { SetUserData } from "@/lib/store/features/UserSlice";
 import { ResetUserData } from "@/lib/store/features/UserSlice";
 import WarningModal from "./WarningModal";
 import Loading from "./Loading";
+import Link from "next/link";
 
 export default function ProfileSetting() {
   const [show, setShow] = useState(false);
@@ -111,7 +112,7 @@ export default function ProfileSetting() {
         email: user.email,
         imagesrc: profilephotosrc,
         data: editingProfile,
-        password: userdata.password
+        password: userdata.password,
       }),
     });
 
@@ -235,13 +236,30 @@ export default function ProfileSetting() {
   };
 
   if (!show) {
-    return <Loading /> // Optionally return null to prevent flickering during verification
+    return <Loading />; // Optionally return null to prevent flickering during verification
   }
 
   return (
     <>
       <div className="w-[47rem] mx-3 my-5 p-5 border border-[#373738a3] rounded-lg">
         <h1 className="text-2xl mb-8 font-bold font-serif ">Your Profile</h1>
+        <div className="flex items-center text-lg gap-2 border-2 border-[#bd145b] p-2 rounded-lg mb-9">
+          <svg
+            className="w-5 h-5 text-[#bd145b]"
+            aria-hidden="true"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+          You have to complete your profile if not completed.
+        </div>
         <div className="flex flex-col items-center gap-6 mb-8">
           <div
             className="relative flex flex-col items-center gap-3 cursor-pointer"
@@ -314,7 +332,7 @@ export default function ProfileSetting() {
             </div>
           )}
         </div>
-
+       
         <div className="mb-2">
           <label className="block mb-1 text-xl capitalize">Gender</label>
           {isEditing["Gender"] ? (
@@ -405,7 +423,10 @@ export default function ProfileSetting() {
         </div>
 
         <div className="mb-2">
-          <label className="block mb-1 text-xl capitalize">Phone Number <span className="text-sm text-red-500">{"(optional)"}</span></label>
+          <label className="block mb-1 text-xl capitalize">
+            Phone Number{" "}
+            <span className="text-sm text-red-500">{"(optional)"}</span>
+          </label>
           {isEditing["PhoneNumber"] ? (
             <div className="flex mb-4 flex-col gap-2 md:flex-row">
               <input
@@ -450,7 +471,10 @@ export default function ProfileSetting() {
               </button>
             </div>
           )}
-          <p className="text-xs courgette mb-4"><span className="text-red-500">Note: </span>Phone number allows your matches to chat you on Whatsapp</p>
+          <p className="text-xs courgette mb-4">
+            <span className="text-red-500">Note: </span>Phone number allows your
+            matches to chat you on Whatsapp
+          </p>
         </div>
 
         <div className="mb-2">
@@ -502,70 +526,76 @@ export default function ProfileSetting() {
         </div>
 
         {/* keywords start*/}
-          <h1 className="text-2xl font-bold text-[#bd145b] mt-8 mb-4">
-            Keywords
-          </h1>
+        <h1 className="text-2xl font-bold text-[#bd145b] mt-8 mb-4">
+          Keywords
+        </h1>
 
-          <div className="mb-2">
-            {isEditing["keywords"] ? (
-              <div className="flex mb-4 flex-col gap-2 md:flex-row">
-                <input
-            type="text"
-            name="key1"
-            placeholder="Enter keyword 1"
-            value={editingProfile.keywords.key1 || ""}
-            onChange={(e) => handleChange(e, "keywords")}
-            className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
-                />
-                <input
-            type="text"
-            name="key2"
-            placeholder="Enter keyword 2"
-            value={editingProfile.keywords.key2 || ""}
-            onChange={(e) => handleChange(e, "keywords")}
-            className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
-                />
-                <input
-            type="text"
-            name="key3"
-            placeholder="Enter keyword 3"
-            value={editingProfile.keywords.key3 || ""}
-            onChange={(e) => handleChange(e, "keywords")}
-            className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
-                />
-                <div className="flex space-x-2">
-            <button
-              onClick={() => handleSave("keywords")}
-              className="bg-[#bd145b] rounded-lg px-4 py-2"
-            >
-              Save
-            </button>
-            <button
-              onClick={() => handleCancel("keywords")}
-              className="border border-[#bd145b] rounded-lg px-4 py-2"
-            >
-              Cancel
-            </button>
-                </div>
-              </div>
-            ) : (
-              <div className="flex justify-between items-center mb-4">
-                <div className="flex flex-col courgette">
-            <span className="text-gray-400 text-sm leading-3">
-              {[profile.keywords.key1, profile.keywords.key2, profile.keywords.key3].filter(Boolean).join(", ") || "Keywords Not set"}
-            </span>
-                </div>
+        <div className="mb-2">
+          {isEditing["keywords"] ? (
+            <div className="flex mb-4 flex-col gap-2 md:flex-row">
+              <input
+                type="text"
+                name="key1"
+                placeholder="Enter keyword 1"
+                value={editingProfile.keywords.key1 || ""}
+                onChange={(e) => handleChange(e, "keywords")}
+                className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+              />
+              <input
+                type="text"
+                name="key2"
+                placeholder="Enter keyword 2"
+                value={editingProfile.keywords.key2 || ""}
+                onChange={(e) => handleChange(e, "keywords")}
+                className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+              />
+              <input
+                type="text"
+                name="key3"
+                placeholder="Enter keyword 3"
+                value={editingProfile.keywords.key3 || ""}
+                onChange={(e) => handleChange(e, "keywords")}
+                className="flex-1 p-2 courgette bg-transparent text-sm border-2 border-gray-500 placeholder-gray-400 outline-none rounded-xl"
+              />
+              <div className="flex space-x-2">
                 <button
-            onClick={() => handleEdit("keywords")}
-            className="border border-[#bd145b] rounded px-4 py-2"
+                  onClick={() => handleSave("keywords")}
+                  className="bg-[#bd145b] rounded-lg px-4 py-2"
                 >
-            Edit
+                  Save
+                </button>
+                <button
+                  onClick={() => handleCancel("keywords")}
+                  className="border border-[#bd145b] rounded-lg px-4 py-2"
+                >
+                  Cancel
                 </button>
               </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="flex justify-between items-center mb-4">
+              <div className="flex flex-col courgette">
+                <span className="text-gray-400 text-sm leading-3">
+                  {[
+                    profile.keywords.key1,
+                    profile.keywords.key2,
+                    profile.keywords.key3,
+                  ]
+                    .filter(Boolean)
+                    .join(", ") || "Keywords Not set"}
+                </span>
+              </div>
+              <button
+                onClick={() => handleEdit("keywords")}
+                className="border border-[#bd145b] rounded px-4 py-2"
+              >
+                Edit
+              </button>
+            </div>
+          )}
+        </div>
 
-          {/* bio start*/}
+        {/* bio start*/}
 
         <h1 className="text-2xl font-bold text-[#bd145b] mt-8 mb-4">Bio</h1>
 
@@ -681,7 +711,10 @@ export default function ProfileSetting() {
 
         {/* Snapchat Edit */}
         <div className="mb-2">
-          <label className="block mb-1 text-xl capitalize">Snapchat <span className="text-sm text-red-500">{"(optional)"}</span></label>
+          <label className="block mb-1 text-xl capitalize">
+            Snapchat{" "}
+            <span className="text-sm text-red-500">{"(optional)"}</span>
+          </label>
           {isEditing["Snapchat"] ? (
             <div className="flex mb-4 flex-col gap-2 md:flex-row">
               <input
@@ -737,7 +770,10 @@ export default function ProfileSetting() {
 
         {/* Facebook Edit */}
         <div className="mb-2">
-          <label className="block mb-1 text-xl capitalize">Facebook <span className="text-sm text-red-500">{"(optional)"}</span></label>
+          <label className="block mb-1 text-xl capitalize">
+            Facebook{" "}
+            <span className="text-sm text-red-500">{"(optional)"}</span>
+          </label>
           {isEditing["Facebook"] ? (
             <div className="flex mb-4 flex-col gap-2 md:flex-row">
               <input

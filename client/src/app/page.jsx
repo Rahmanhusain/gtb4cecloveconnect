@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import Notify from "@/components/Notify";
 
 import Bganim from "@/components/Bganim";
 
@@ -9,7 +8,7 @@ export default function Home() {
     <div>
      <Bganim />
 
-      <Notify />
+     
       <div className="flex sm:flex md:flex-row flex-col-reverse sm:px-32 px-10 items-center justify-between min-h-[calc(100dvh-4.6rem)] sm:py-24 py-10">
         <div className="md:w-1/2 w-full h-full text-left">
           <h1 className="sm:text-6xl text-5xl cookie my-6">Find You Date</h1>

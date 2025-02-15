@@ -6,19 +6,26 @@ import connectDB from "@/lib/DB/Dbconnection";
 export async function POST(request) {
   try {
     await connectDB();
-    const { email,password } = await request.json();
+    const { email, password } = await request.json();
     let data;
     const user = await User.findOne({ email });
     if (user && user.password === password) {
-        data = await User.find({});
+      data = await User.find({
+        gender: user.gender === "Male" ? "Female" : "Male",
+        userid: { $nin: user.matched },
+        $or: [
+          { Profilename: { $ne: null } },
+          { keywords: { key1: { $ne: "" }, key2: { $ne: "" }, key3: { $ne: "" } } },
+          { bio: { $ne: "" } },
+        ],
+      }).select("-phoneNumber -Instagram -Snapchat -Facebook -matched -matchrequest -enrollmentno");
+
       if (!data) {
         return NextResponse.json({ error: "User not found" }, { status: 404 });
       }
     } else {
       return NextResponse.json({ error: "Invalid password" }, { status: 401 });
     }
-
-    /* console.log(updatedUser) */
 
     return NextResponse.json({
       data: data,

@@ -96,7 +96,7 @@ export default function Notification({
             </div>
             <div className="text-gray-300 flex flex-col w-full">
               <h1 className="text-sm w-full">
-                You have a new match with {item.Profilename}, Check out their
+                You have a new match with <span className="text-[#FF006Aa7]">{item.Profilename}</span>, Check out their
                 full profile
               </h1>
               <h2 className="text-xs w-full text-gray-400 text-left">

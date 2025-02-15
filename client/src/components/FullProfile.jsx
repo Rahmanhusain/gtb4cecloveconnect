@@ -1,7 +1,7 @@
 "use client";
 import React,{useState,useEffect} from "react";
 import Image from "next/image";
-import { Instagram, WhatsAppIcon } from "@/icons/icon";
+import { BackIcon, Instagram, WhatsAppIcon } from "@/icons/icon";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
@@ -35,9 +35,19 @@ function FullProfile({ userid }) {
             profilephotosrc: result.data.profilephotosrc,
           })
         );
+        if (
+          !result.data.gender ||
+          !result.data.keywords.key1 ||
+          !result.data.keywords.key2 ||
+          !result.data.keywords.key3 ||
+          !result.data.Instagram.Username ||
+          !result.data.bio
+        ) {
+          router.push("/profile");
+        } 
         dispatch(SetUserData(result.data));
       } else {
-        router.push("/");
+        router.push("/login");
       }
     };
     if (user.email === null) {
@@ -79,6 +89,8 @@ return (
     
     <Bganim />
     <div className="mx-auto">
+    <Link href="/match" className="px-2 py-1 bg-[#FF006Aa7] flex  gap-1 text-sm cookie w-fit mt-4 rounded-full"><BackIcon size={16} /> Go to Match</Link>
+
       <h1 className="cookie text-4xl mt-4 mb-2 italic">Profile</h1>
       <div className="rounded-2xl h-[55vh] w-auto aspect-[39/49] relative">
         <Image

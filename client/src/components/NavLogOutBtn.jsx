@@ -3,14 +3,17 @@ import Link from "next/link";
 import React, { useState, useEffect, use } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { SetUser } from "@/lib/store/features/AuthSlice";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SetUserData } from "@/lib/store/features/UserSlice";
 import { setHasNotif } from "@/lib/store/features/NotifDotSlice";
 import Image from "next/image";
-import { HeartStrokedIcon, LoaderIcon2 } from "@/icons/icon";
+import { HeartStrokedIcon} from "@/icons/icon";
 import Notification from "./Notification";
+import Notify from "./Notify";
+import Loading from "./Loading";
 
 function NavLogOutBtn() {
+  const router=useRouter();
   const dispatch = useAppDispatch();
   const pathname = usePathname(); // Get the current pathname
   const searchParams = useSearchParams(); // Get the current search params
@@ -30,23 +33,35 @@ function NavLogOutBtn() {
       });
       const result = await res.json();
 
-      setisjwtverifying(false);
+     
       if (result.status === 201) {
-/*         console.log(result.data, "verifytoken run");
- */        dispatch(
+        dispatch(
           SetUser({
-            email: result.data.email,
-            name: result.data.Profilename,
-            profilephotosrc: result.data.profilephotosrc,
+        email: result.data.email,
+        name: result.data.Profilename,
+        profilephotosrc: result.data.profilephotosrc,
           })
         );
         if (result.data.matched.length > result.data.notififlastindex) {
           dispatch(setHasNotif(true));
         }
-        /*         console.log(result.data.matched.length > result.data.notififlastindex)
-         */
         dispatch(SetUserData(result.data));
+
+        // Check if any of the required fields are empty or null
+        if (
+          !result.data.gender ||
+          !result.data.keywords.key1 ||
+          !result.data.keywords.key2 ||
+          !result.data.keywords.key3 ||
+          !result.data.Instagram.Username ||
+          !result.data.bio
+        ) {
+          router.push("/profile");
+        } else {
+          router.push("/match");
+        }
       }
+      setisjwtverifying(false);
     };
 
     if (!user.email) {
@@ -55,6 +70,11 @@ function NavLogOutBtn() {
       console.log("user.email is not null");
     }
   }, [pathname, searchParams, user.email, dispatch, userdata]); // Re-run when pathname or searchParams change
+  if(isjwtverifying){
+    return (
+     <Loading/>
+    )
+  }
 
   return (
     <div className="w-auto h-full">
@@ -78,13 +98,16 @@ function NavLogOutBtn() {
           <button
             onClick={() => {
               setopenNotification(true);
-              dispatch(setHasNotif(false)); 
+              dispatch(setHasNotif(false));
             }}
             className="flex items-center w-fit h-full gap-2 py-2 justify-center relative"
           >
             <HeartStrokedIcon className="w-10 h-10 text-white" />
             {newnotif.hasNotif && (
-              <span className="absolute w-3 h-3 bg-red-700 rounded-full ring-2 ring-black top-4 right-0"></span>
+              <>
+                <span className="absolute w-3 h-3 bg-red-700 rounded-full ring-2 ring-black top-4 right-0"></span>
+                <Notify />
+              </>
             )}
           </button>
           <Link

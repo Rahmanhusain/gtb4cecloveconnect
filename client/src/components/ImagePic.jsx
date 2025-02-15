@@ -19,6 +19,7 @@ export default function ImagePic() {
   const [index, setindex] = React.useState(0);
   const [matches, setMatches] = useState([]);
   const [show, setshow] = useState(false);
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -38,6 +39,16 @@ export default function ImagePic() {
             profilephotosrc: result.data.profilephotosrc,
           })
         );
+        if (
+          !result.data.gender ||
+          !result.data.keywords.key1 ||
+          !result.data.keywords.key2 ||
+          !result.data.keywords.key3 ||
+          !result.data.Instagram.Username ||
+          !result.data.bio
+        ) {
+          router.push("/profile");
+        }
         dispatch(SetUserData(result.data));
         setshow(true);
       } else {
@@ -47,6 +58,17 @@ export default function ImagePic() {
     if (user.email === null) {
       verifyToken();
     } else {
+      if (
+        !userdata.gender ||
+        !userdata.keywords.key1 ||
+        !userdata.keywords.key2 ||
+        !userdata.keywords.key3 ||
+        !userdata.Instagram.Username ||
+        !userdata.bio
+      ) {
+        router.push("/profile");
+      }
+      setshow(true);
     }
   }, []);
 
@@ -67,7 +89,7 @@ export default function ImagePic() {
 
       const result = await res.json();
       setMatches(result.data);
-      setshow(true);
+      setloading(false);
     };
 
     retireveuser();
@@ -201,7 +223,7 @@ export default function ImagePic() {
           </div>
         </div>
       )}
-      {matches.length === 0 && (
+      {loading && (
         <div className="flex flex-col items-center justify-center w-full min-h-[calc(100dvh-4.7rem)] z-40 bg-black">
           <Heart className=" h-12 w-12 text-red-500 heartbeat" />
           <p className="text-center mt-2 flex items-center  gap-2">
@@ -215,6 +237,15 @@ export default function ImagePic() {
               <Heart className="w-2 h-2 text-red-500" />
             </span>
           </p>
+        </div>
+      )}
+      {!loading && matches.length===0 && (
+        <div className="flex flex-col items-center justify-center w-full min-h-[calc(100dvh-4.7rem)] z-40 bg-black">
+          <HeartBroken className=" h-12 w-12 text-red-500 heartbeat" />
+          <p className="text-center text-lg mt-2 flex cookie items-center leading-4 gap-2">
+           No more users found!
+          </p>
+          <p className="cookie">check notifications for any matches</p>
         </div>
       )}
       {/* <div
