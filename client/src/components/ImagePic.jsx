@@ -143,7 +143,7 @@ export default function ImagePic() {
       <Bganim opacity="opacity-50" />
       <div
         id="hearts-alpaca"
-        className="hearts fixed bottom-0 left-0 opacity-50 sm:opacity-100"
+        className="hearts fixed bottom-0 left-0 opacity-50  sm:opacity-80"
       >
         <div className="heart"></div>
         <div className="heart"></div>
