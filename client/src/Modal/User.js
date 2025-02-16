@@ -62,7 +62,7 @@ const UserSchema = new mongoose.Schema({
   profilephotosrc: {
     type: String,
     default:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s",
+      "https://iffadcitwirnptuabcbr.supabase.co/storage/v1/object/public/findyourdateuserimages//avatar.png",
   },
   keywords: {
     key1: {

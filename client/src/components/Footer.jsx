@@ -12,7 +12,7 @@ function Footer() {
         className="text-3xl cookie flex flex-col w-fit mx-auto mb-2 relative"
       >
         Find Your Date{" "}
-        <h3 className="text-base text-[#bd145b] font-bold">GTB4Love</h3>
+        <h3 className="text-base text-[#bd145b] text-left font-bold">GTB4Love</h3>
         <Heart className=" h-3 w-3 absolute -top-2 left-[0.6rem] text-red-500 heartbeat" />
       </Link>
 

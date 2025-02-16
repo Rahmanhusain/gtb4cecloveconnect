@@ -4,7 +4,7 @@ import {
   EditIcon,
   EyeClose,
   EyeOpen,
-  Instagram,
+  BackIcon,
   MiniloadIcon,
   PowerIcon,
 } from "@/icons/icon";
@@ -30,7 +30,7 @@ export default function ProfileSetting() {
   const messageref = useRef(null);
   const [isSaving, setisSaving] = useState(false);
   const [profilephotosrc, setprofilephotosrc] = useState(
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s"
+    "https://iffadcitwirnptuabcbr.supabase.co/storage/v1/object/public/findyourdateuserimages//avatar.png"
   );
   const user = useAppSelector((state) => state.Authenticator);
   const userdata = useAppSelector((state) => state.UserData);
@@ -117,7 +117,7 @@ export default function ProfileSetting() {
         email: user.email,
         data: editingProfile,
         password: userdata.password,
-        userid: userdata.userid
+        userid: userdata.userid,
       })
     );
 
@@ -251,11 +251,27 @@ export default function ProfileSetting() {
 
   return (
     <>
+
       <div className="w-[47rem] mx-3 my-5 p-5 border border-[#373738a3] rounded-lg">
-        <h1 className="text-2xl mb-8 font-bold font-serif ">Your Profile</h1>
-        <div className="flex items-center text-lg gap-2 border-2 border-[#bd145b] p-2 rounded-lg mb-9">
-          <svg
-            className="w-5 h-5 text-[#bd145b]"
+        <div className="flex gap-2 items-center">
+        <Link
+        href="/match"
+        className="pl-2 pr-3 py-1 bg-[#FF006Aa7] flex  gap-1 text-sm cookie w-fit my-4 rounded-full"
+      >
+      <BackIcon size={16} />Go to Match
+      
+      </Link>
+      {
+         !userdata.gender ||
+         !userdata.keywords.key1 ||
+         !userdata.keywords.key2 ||
+         !userdata.keywords.key3 ||
+         !userdata.Instagram.Username ||
+         !userdata.bio ||
+         userdata.profilephotosrc==="https://iffadcitwirnptuabcbr.supabase.co/storage/v1/object/public/findyourdateuserimages//avatar.png" &&
+      <span className="flex items-center gap-2 text-base cookie">
+      <svg
+            className="w-4 h-4 text-[#FF006Aa7]"
             aria-hidden="true"
             fill="none"
             viewBox="0 0 20 20"
@@ -268,8 +284,15 @@ export default function ProfileSetting() {
               d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
             />
           </svg>
-          You have to complete your profile if not completed.
+        Complete your profile
+      </span>
+}
         </div>
+      
+        <h1 className="text-2xl mb-8 font-bold font-serif ">Your Profile</h1>
+
+       
+
         <div className="flex flex-col items-center gap-6 mb-8">
           <div
             className="relative flex flex-col items-center gap-3 cursor-pointer"

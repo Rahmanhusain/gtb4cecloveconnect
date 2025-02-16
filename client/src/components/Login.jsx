@@ -64,7 +64,7 @@ export default function Login() {
       console.log("login successful");
 /*         dispatch(SetUser({ email: result.data.email, name: result.data.name,profilephotosrc: result.data.profilephotosrc }));
  */      /* setisloginsuccess(false)  */
-      router.push("/");
+      router.push("/match");
     }
   };
   return (

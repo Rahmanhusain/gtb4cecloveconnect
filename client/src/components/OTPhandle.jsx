@@ -105,7 +105,7 @@ const OTPhandle = ({ setIsOtpOpen, propemailRef,isforget }) => {
       setisvarifying(true);
       const status = (isforget?await VerifyOtpforget(newOtp.join("")) : await VerifyOtp(newOtp.join("")));
       status === 201
-        ?(alert(isforget?'Password Reset Successfully,redirecting to Login':'Registration Successful, redirecting to home page'),isforget?Router.push("/login"):Router.push("/"))
+        ?(alert(isforget?'Password Reset Successfully,redirecting to Login':'Registration Successful, redirecting to home page'),isforget?Router.push("/login"):Router.push("/profile"))
         : (setisvarifying(false),warn("Wrong OTP or might be expire Try Again !"));
       /* setisvarifying(false); */
       setOtp(new Array(4).fill(""));

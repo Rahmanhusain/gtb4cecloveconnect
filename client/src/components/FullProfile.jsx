@@ -73,7 +73,9 @@ function FullProfile({ userid }) {
           userid: userid,
         }),
       });
-
+      if (res.status === 403) {
+        router.push("/match");
+      }
       const result = await res.json();
       setProfile(result.data);
     };
