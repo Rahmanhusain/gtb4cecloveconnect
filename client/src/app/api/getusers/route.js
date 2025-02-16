@@ -12,12 +12,15 @@ export async function POST(request) {
     if (user && user.password === password) {
       data = await User.find({
         gender: user.gender === "Male" ? "Female" : "Male",
-        userid: { $nin: user.matched },
-        $or: [
-          { Profilename: { $ne: null } },
-          { keywords: { key1: { $ne: "" }, key2: { $ne: "" }, key3: { $ne: "" } } },
-          { bio: { $ne: "" } },
-        ],
+        userid: { $nin: user.matchrequest },
+        Profilename: { $ne: null },
+       /*  profilephotosrc: { $ne: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnSA1zygA3rubv-VK0DrVcQ02Po79kJhXo_A&s" }, */
+        "keywords.key1": { $ne: "" },
+        "keywords.key2": { $ne: "" },
+        "keywords.key3": { $ne: "" },
+        bio: { $ne: "" },
+        "Instagram.Username": { $ne: "" },
+        "Instagram.Link": { $ne: "" },
       }).select("-phoneNumber -Instagram -Snapchat -Facebook -matched -matchrequest -enrollmentno");
 
       if (!data) {

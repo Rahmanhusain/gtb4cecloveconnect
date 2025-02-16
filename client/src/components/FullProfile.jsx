@@ -42,7 +42,8 @@ function FullProfile({ userid }) {
           !result.data.keywords.key3 ||
           !result.data.Instagram.Username ||
           !result.data.bio
-        ) {
+/*           !userdata.profilephotosrc.startsWith("data:image/")
+ */        ) {
           router.push("/profile");
         } 
         dispatch(SetUserData(result.data));

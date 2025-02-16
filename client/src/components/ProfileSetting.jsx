@@ -34,7 +34,7 @@ export default function ProfileSetting() {
   );
   const user = useAppSelector((state) => state.Authenticator);
   const userdata = useAppSelector((state) => state.UserData);
-
+  const [imagefile, setimagefile] = useState(null);
   useEffect(() => {
     const verifyToken = async () => {
       const res = await fetch("/api/verifytoken", {
@@ -103,17 +103,27 @@ export default function ProfileSetting() {
   }, [userdata]);
 
   const updateProfile = async () => {
-    const res = await fetch("/api/updateprofile", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    const formData = new FormData();
+
+    // Append the file
+    if (imagefile) {
+      formData.append("file", imagefile); // imageFile should be a Blob or File object
+    }
+
+    // Append the JSON string
+    formData.append(
+      "json",
+      JSON.stringify({
         email: user.email,
-        imagesrc: profilephotosrc,
         data: editingProfile,
         password: userdata.password,
-      }),
+        userid: userdata.userid
+      })
+    );
+
+    const res = await fetch("/api/updateprofile", {
+      method: "POST",
+      body: formData,
     });
 
     const result = await res.json();
@@ -272,6 +282,7 @@ export default function ProfileSetting() {
               width={70}
               height={70}
               className="rounded-2xl h-[55vh] w-auto aspect-[39/49] object-cover brightness-75"
+              unoptimized
               alt="profile"
             />
             <p className="text-text flex gap-1 items-center text-xs">
@@ -332,7 +343,7 @@ export default function ProfileSetting() {
             </div>
           )}
         </div>
-       
+
         <div className="mb-2">
           <label className="block mb-1 text-xl capitalize">Gender</label>
           {isEditing["Gender"] ? (
@@ -919,6 +930,7 @@ export default function ProfileSetting() {
           setDpmodOpen={setDpmodOpen}
           setprofilephoto={setprofilephotosrc}
           setCansave={setCansave}
+          setimagefile={setimagefile}
         />
       )}
       {isWarnOpen && (

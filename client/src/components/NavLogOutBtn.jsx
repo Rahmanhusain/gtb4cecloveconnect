@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect} from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { SetUser } from "@/lib/store/features/AuthSlice";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -58,7 +58,9 @@ function NavLogOutBtn() {
         ) {
           router.push("/profile");
         } else {
-          router.push("/match");
+            if (pathname === "/") {
+            router.push("/match");
+            }
         }
       }
       setisjwtverifying(false);

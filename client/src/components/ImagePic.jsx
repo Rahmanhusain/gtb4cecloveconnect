@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Heart, HeartBroken } from "@/icons/icon";
+import { Heart, HeartBroken, LoaderIcon2 } from "@/icons/icon";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { SetUser } from "@/lib/store/features/AuthSlice";
@@ -20,6 +20,8 @@ export default function ImagePic() {
   const [matches, setMatches] = useState([]);
   const [show, setshow] = useState(false);
   const [loading, setloading] = useState(true);
+  const [nodata, setnodata] = useState(false);
+  const [liked, setliked] = useState(false);
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -64,8 +66,9 @@ export default function ImagePic() {
         !userdata.keywords.key2 ||
         !userdata.keywords.key3 ||
         !userdata.Instagram.Username ||
-        !userdata.bio
-      ) {
+        !userdata.bio 
+/*         !userdata.profilephotosrc.startsWith("data:image/")
+ */      ) {
         router.push("/profile");
       }
       setshow(true);
@@ -122,7 +125,7 @@ export default function ImagePic() {
 
     setTimeout(() => {
       if (index === matches.length - 1) {
-        setindex(0);
+        setnodata(true);
       } else {
         setindex(index + 1);
       }
@@ -147,7 +150,7 @@ export default function ImagePic() {
         <div className="heart"></div>
         <div className="heart"></div>
       </div>
-      {matches.length !== 0 && (
+      {matches.length !== 0 && !nodata && (
         <div className="flex flex-row py-10 justify-evenly min-h-[100dvh] ">
           <div
             id="heartbreakIcon"
@@ -179,7 +182,14 @@ export default function ImagePic() {
                 <div
                   id="heartIcon"
                   className="heartbreak flex sm:hidden  absolute bottom-0 right-0 z-10 bg-[#FF006A40] rounded-full p-4"
-                  onClick={fadeout}
+                  onClick={() => {
+                    /* requestMatch(userdata.userid, matches[index].userid);
+                    fadeout(); */
+                    setliked(true);
+                    setTimeout(() => {
+                      setliked(false);
+                    }, 500);
+                  }}
                 >
                   <Heart className="w-8 h-8 text-[#E1306C]" />
                 </div>
@@ -215,8 +225,12 @@ export default function ImagePic() {
             id="heartIcon"
             className="heartbreak hidden sm:flex  fixed top-1/2 md:right-[20%] right-[10%] bg-[#FF006A40] rounded-full cursor-pointer p-4"
             onClick={() => {
-              requestMatch(userdata.userid, matches[index].userid);
-              fadeout();
+              /* requestMatch(userdata.userid, matches[index].userid);
+              fadeout(); */
+              setliked(true);
+              setTimeout(() => {
+                setliked(false);
+              }, 600);
             }}
           >
             <Heart className="w-12 h-12 text-[#E1306C]" />
@@ -237,13 +251,24 @@ export default function ImagePic() {
               <Heart className="w-2 h-2 text-red-500" />
             </span>
           </p>
+          <p className="cookie mt-4 "><LoaderIcon2 className="w-8 h-8 text-red-600 animate-spin"></LoaderIcon2></p>
         </div>
       )}
-      {!loading && matches.length===0 && (
+      {!loading && matches.length === 0 && (
         <div className="flex flex-col items-center justify-center w-full min-h-[calc(100dvh-4.7rem)] z-40 bg-black">
           <HeartBroken className=" h-12 w-12 text-red-500 heartbeat" />
           <p className="text-center text-lg mt-2 flex cookie items-center leading-4 gap-2">
-           No more users found!
+            No more users found!
+          </p>
+          <p className="cookie">check notifications for any matches</p>
+        </div>
+      )}
+
+      {nodata && (
+        <div className="flex flex-col items-center justify-center w-full min-h-[calc(100dvh-4.7rem)] z-40 bg-black">
+          <HeartBroken className=" h-12 w-12 text-red-500 heartbeat" />
+          <p className="text-center text-lg mt-2 flex cookie items-center leading-4 gap-2">
+            No more users found!
           </p>
           <p className="cookie">check notifications for any matches</p>
         </div>
@@ -257,6 +282,12 @@ export default function ImagePic() {
         <div className="heart"></div>
         <div className="heart"></div>
       </div> */}
+
+      {liked && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+          <Heart className="h-auto w-[20%] text-[#ca2c4c] heartbeat scale-up-animation" />
+        </div>
+      )}
     </div>
   );
 }

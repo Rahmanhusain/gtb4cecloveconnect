@@ -3,80 +3,70 @@ import React, { useState, useRef, Suspense, lazy } from "react";
 import "cropperjs/dist/cropper.css";
 import { space_mono } from "@/lib/fonts";
 import { NoImageIcon } from "@/icons/icon";
+import Link from "next/link";
 const Cropper = lazy(() => import("react-cropper"));
 
-const Crop = ({ setprofilephoto,setDpmodOpen,setCansave}) => {
+const Crop = ({ setprofilephoto,setDpmodOpen,setCansave,setimagefile}) => {
   const [URL, setURL] = useState("#");
   const [btndisable, setbtndisable] = useState(true);
   const cropperRef = useRef(null);
 
   const handleInputChange = (e) => {
-    // Check if cropperRef is defined and the value has changed
     if (cropperRef.current && e.target.value !== URL) {
       e.preventDefault();
-
+  
       let files;
       if (e.dataTransfer) {
         files = e.dataTransfer.files;
       } else if (e.target) {
         files = e.target.files;
       }
-
+  
       if (files && files.length > 0) {
         const file = files[0];
-
+  
+        // Check file size (limit: 350 KB)
+        if (file.size > 350 * 1024) {
+          alert("File size exceeds 350 KB. Please upload a smaller file. visit https://compressoio.vercel.app/ to compress your image for free.");
+          return;
+        }
+  
         if (file instanceof Blob) {
           const reader = new FileReader();
-
+  
           reader.onload = () => {
             setURL(reader.result);
             setbtndisable(false);
           };
-
+  
           reader.readAsDataURL(file);
         }
       }
     }
   };
-
-  const resizeToSquare = (croppedCanvas) => {
-    const width = croppedCanvas.width;
-    const height = croppedCanvas.height;
-
   
 
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
 
-
-
-    // Set canvas dimensions to targetSize (800x800)
-    canvas.width = width;
-    canvas.height = height;
-
-    // Center the resized image on the canvas
-    const xOffset = width / 2;
-    const yOffset = height / 2;
-    ctx.drawImage(croppedCanvas, xOffset, yOffset, newWidth, newHeight);
-
-    // Return the resized canvas
-    return canvas;
-  };
 
   const getCropData = () => {
     if (typeof cropperRef.current?.cropper !== "undefined") {
       const croppedImage = cropperRef.current?.cropper.getCroppedCanvas();
 
-     /*  const base64DataURL = resizeToSquare(croppedImage).toDataURL(
-        "image/webp",
-        1
-      ); */
-
-      /* console.log(base64DataURL); */
-
-      setprofilephoto(croppedImage.toDataURL("image/webp", 1));
-      setCansave(true);
-      setDpmodOpen(false);
+      if (croppedImage) {
+        croppedImage.toBlob((blob) => {
+          if (blob) {
+            const file = new File([blob], "cropped-image.jpg", { type: "image/jpeg" });
+  
+            // Save the file to state or send to the server
+            setimagefile(file); // Save the file in state
+            setprofilephoto(croppedImage.toDataURL("image/jpeg", 0.65));
+            setCansave(true);
+            setDpmodOpen(false);
+  
+            console.log("Cropped JPEG file:", file);
+          }
+        }, "image/jpeg", 0.65);
+      }
     }
   };
 
@@ -109,19 +99,20 @@ const Crop = ({ setprofilephoto,setDpmodOpen,setCansave}) => {
                 and drop
               </p>
               <p className="text-sm text-gray-400">
-                PNG,jpeg or JPG only (Max 500kb)
+                PNG,.webp,jpeg or JPG only (Max 350kb)
               </p>
             </div>
             <input
               id="dropzone-file"
               type="file"
-              accept=".jpg,.jpeg,.png"
+              accept=".jpg,.jpeg,.png,.webp"
               multiple={false}
               onChange={handleInputChange}
               className="hidden"
             />
           </label>
         </div>
+        <span className="cookie text-lg"><span className="font-bold text-blue-500">Tip: </span>Visit <Link href={'https://compressoio.vercel.app/'} target="_blank" className="text-[#bd145b]" >https://compressoio.vercel.app/</Link> to compress your images for free.</span>
       </div>
       <Suspense
         fallback={

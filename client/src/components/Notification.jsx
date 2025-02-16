@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { CrossIcon } from "@/icons/icon";
+import { CrossIcon, HeartBroken } from "@/icons/icon";
 import Link from "next/link";
 import { Heart } from "@/icons/icon";
 
@@ -13,6 +13,7 @@ export default function Notification({
   setopenNotification,
 }) {
   const [notification, setnotification] = useState([]);
+  const [loading, setloading] = useState(true);
   const handlecross = () => {
     setopenNotification(false);
   };
@@ -34,6 +35,7 @@ export default function Notification({
       const result = await res.json();
       /*       setHasNotif(false);
        */ setnotification(result.data);
+      setloading(false);
     };
     retireveuser();
   }, []);
@@ -58,7 +60,7 @@ export default function Notification({
   }, []);
 
   useEffect(() => {
-      document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -96,8 +98,9 @@ export default function Notification({
             </div>
             <div className="text-gray-300 flex flex-col w-full">
               <h1 className="text-sm w-full">
-                You have a new match with <span className="text-[#FF006Aa7]">{item.Profilename}</span>, Check out their
-                full profile
+                You have a new match with{" "}
+                <span className="text-[#FF006Aa7]">{item.Profilename}</span>,
+                Check out their full profile
               </h1>
               <h2 className="text-xs w-full text-gray-400 text-left">
                 Click here to view
@@ -105,7 +108,7 @@ export default function Notification({
             </div>
           </Link>
         ))}
-        {notification.length === 0 && (
+        {loading && (
           <div className="flex flex-col items-center justify-center w-full h-full z-40 bg-black">
             <Heart className=" h-12 w-12 text-red-500 heartbeat" />
             <p className="text-center mt-2 flex items-center  gap-2">
@@ -118,6 +121,14 @@ export default function Notification({
               <span className="dot dot3">
                 <Heart className="w-2 h-2 text-red-500" />
               </span>
+            </p>
+          </div>
+        )}
+        {notification.length === 0 && (
+          <div className="flex flex-col items-center justify-center w-full h-full z-40 bg-black">
+            <HeartBroken className=" h-12 w-12 text-red-500 heartbeat" />
+            <p className="text-center text-lg mt-2 flex cookie items-center leading-4 gap-2">
+              No more Notifications
             </p>
           </div>
         )}

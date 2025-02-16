@@ -3,7 +3,7 @@ import { CrossIcon } from "@/icons/icon";
 import React,{ useState, Suspense,lazy} from "react";
 const Cropper = lazy(() => import("./Crop.jsx"));
 
-function DPSelectorsModal({ setDpmodOpen ,setprofilephoto,setCansave}) {
+function DPSelectorsModal({ setDpmodOpen ,setprofilephoto,setCansave,setimagefile}) {
   const [closeanim, setcloseanim] = useState(false);
   
   return (
@@ -34,7 +34,7 @@ function DPSelectorsModal({ setDpmodOpen ,setprofilephoto,setCansave}) {
             </div>
           }
         >
-          <Cropper setprofilephoto={setprofilephoto} setDpmodOpen={setDpmodOpen} setCansave={setCansave}/>
+          <Cropper setprofilephoto={setprofilephoto} setDpmodOpen={setDpmodOpen} setCansave={setCansave} setimagefile={setimagefile}/>
         </Suspense>
 
         {/* <div className="flex justify-center gap-2">
