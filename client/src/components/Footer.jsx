@@ -7,13 +7,13 @@ function Footer() {
   return (
     <footer className="text-center px-3 bg-[#050505] border-t border-[#3434349f] py-6">
       {/* Logo Section */}
-      <Link
-        href="/"
-        className="text-3xl cookie flex flex-col w-fit mx-auto mb-2 relative"
-      >
-        Find Your Date{" "}
-        <h3 className="text-base text-[#bd145b] text-left font-bold">GTB4Love</h3>
-        <Heart className=" h-3 w-3 absolute -top-2 left-[0.6rem] text-red-500 heartbeat" />
+      <Link href="/" className="text-3xl courgette tracking-wider flex flex-col relative ">
+        
+      Gtb4Love{" "} <Heart className=" h-2 w-2 absolute -top-[0.1rem] right-1/2 text-red-500 heartbeat" />
+        <h3 className="text-base text-[#bd145b] tracking-normal font-bold cookie leading-4">
+          
+          Find Your Date
+        </h3>{" "}
       </Link>
 
       {/*developer section */}
